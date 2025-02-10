@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TankView : MonoBehaviour
 {
     private TankController tankController;
+    private CameraShake cameraShake;
     private float movement;
     private float rotation;
     
@@ -23,6 +24,7 @@ public class TankView : MonoBehaviour
     private void Start()
     {
         GameObject cam = GameObject.Find("Main Camera");
+        cameraShake = cam.GetComponent<CameraShake>();
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 3f, -4f);
         tankController.GetTankView().aimSlider.value = tankController.GetTankModel().minLaunchForce;
@@ -64,7 +66,7 @@ public class TankView : MonoBehaviour
         tankController.GetTankModel().fired = true;
         
         Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
-        
+        StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
         shellInstance.velocity = tankController.GetTankModel().currentLaunchForce * fireTransform.forward;
     }
 
