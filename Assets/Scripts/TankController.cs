@@ -30,9 +30,39 @@ public class TankController
         Quaternion deltaRotation = Quaternion.Euler(vector * Time.deltaTime);
         tankRigidbody.MoveRotation(tankRigidbody.rotation * deltaRotation);
     }
+
+    public void FireProcess()
+    {
+        tankView.aimSlider.value = tankModel.minLaunchForce;
+
+        if (tankModel.currentLaunchForce >= tankModel.maxLaunchForce && !tankModel.fired)
+        {
+            tankModel.currentLaunchForce = tankModel.maxLaunchForce;
+            tankView.Fire();
+        }
+        else if (Input.GetButtonDown("Jump"))
+        {
+            tankModel.fired = false;
+            tankModel.currentLaunchForce = tankModel.minLaunchForce;
+        }
+        else if (Input.GetButton("Jump") && !tankModel.fired)
+        {
+            tankModel.currentLaunchForce += tankModel.chargeSpeed * Time.deltaTime;
+            tankView.aimSlider.value = tankModel.currentLaunchForce;
+        }
+        else if (Input.GetButtonUp("Jump"))
+        {
+            tankView.Fire();
+        }
+    }
     
     public TankModel GetTankModel()
     {
         return tankModel;
+    }
+
+    public TankView GetTankView()
+    {
+        return tankView;
     }
 }

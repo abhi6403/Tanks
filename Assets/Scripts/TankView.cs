@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankView : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class TankView : MonoBehaviour
     
     public Rigidbody rb;
     public MeshRenderer[] childs;
+
+    public Transform fireTransform;
+    public Slider aimSlider;
+
+    public Rigidbody shell;
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
@@ -19,6 +25,7 @@ public class TankView : MonoBehaviour
         GameObject cam = GameObject.Find("Main Camera");
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 3f, -4f);
+        tankController.GetTankView().aimSlider.value = tankController.GetTankModel().minLaunchForce;
     }
 
     private void Update()
@@ -34,6 +41,8 @@ public class TankView : MonoBehaviour
         {
             tankController.Rotate(rotation,tankController.GetTankModel().rotationSpeed);
         }
+        
+        tankController.FireProcess();
     }
 
     private void Movement()
@@ -48,6 +57,15 @@ public class TankView : MonoBehaviour
         {
             childs[i].material = color;
         }
+    }
+    
+    public void Fire()
+    {
+        tankController.GetTankModel().fired = true;
+        
+        Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
+        
+        shellInstance.velocity = tankController.GetTankModel().currentLaunchForce * fireTransform.forward;
     }
 
     public Rigidbody getRigidbody()
