@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1911154633730512705}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08715596, y: -0, z: -0, w: -0.9961947}
-  m_LocalPosition: {x: 0, y: 1.7, z: 1.35}
+  m_LocalPosition: {x: 0, y: 1.826, z: 2.062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -433,7 +433,7 @@ MonoBehaviour:
   - {fileID: 4959132435605449607}
   fireTransform: {fileID: 6544317465860475146}
   aimSlider: {fileID: 1289341129724263172}
-  shell: {fileID: 3536753776632961177, guid: affa1b16948823b4b848c17a0943e35f, type: 3}
+  shell: {fileID: 8142298251708592852, guid: 28fefa089149ea847ae843638066c83a, type: 3}
 --- !u!54 &-6539351600588824667
 Rigidbody:
   m_ObjectHideFlags: 0
