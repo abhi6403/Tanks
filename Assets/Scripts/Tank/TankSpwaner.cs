@@ -16,11 +16,7 @@ public class TankSpwaner : MonoBehaviour
     public TankView tankView;
 
     public List<Tank> tanksList;
-    void Start()
-    {
-        
-    }
-
+ 
     public void CreateTank(TankTypes tankType)
     {
         if (tankType == TankTypes.BLUETANK)
