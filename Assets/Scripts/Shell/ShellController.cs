@@ -6,12 +6,21 @@ using UnityEngine;
 public class ShellController : MonoBehaviour
 {
     public ParticleSystem explosion;
+    //public DestroyableItems destroyableItems;
     private void OnCollisionEnter(Collision collision)
     {
+        /*if (destroyableItems != null)
+        {
+                if (destroyableItems.gameObject == collision.gameObject)
+                {
+                    Destroy(destroyableItems.gameObject);
+                }
+        }*/
         SpawnDamageParticles();
         Explode();
     }
 
+    
     private void Explode()
     {
         Destroy(gameObject);
@@ -21,5 +30,6 @@ public class ShellController : MonoBehaviour
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
     }
+    
     
 }
