@@ -431,6 +431,8 @@ MonoBehaviour:
   childs:
   - {fileID: 4959132435605449605}
   - {fileID: 4959132435605449607}
+  ShellController: {fileID: 2080484652483106648, guid: 28fefa089149ea847ae843638066c83a,
+    type: 3}
   fireTransform: {fileID: 6544317465860475146}
   aimSlider: {fileID: 1289341129724263172}
   shell: {fileID: 8142298251708592852, guid: 28fefa089149ea847ae843638066c83a, type: 3}
