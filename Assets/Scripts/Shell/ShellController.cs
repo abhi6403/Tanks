@@ -1,28 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class ShellController : MonoBehaviour
+public class ShellController
 {
-    public ParticleSystem explosion;
+    private ShellView shellView;
+    private ShellModel shellModel;
 
-    private void OnCollisionEnter(Collision collision)
+    public ShellController(ShellView shellView, ShellModel shellModel,Transform shellTransform)
     {
-        SpawnDamageParticles();
-        Explode();
+        this.shellModel = shellModel;
+        this.shellView = Fire(shellView,shellTransform);
     }
 
+    private ShellView Fire(ShellView shellView, Transform shellTransform)
+    {
+        GameObject shellGameObject = Object.Instantiate(shellView.gameObject, shellTransform.position, shellTransform.rotation);
+        
+        return shellGameObject.GetComponent<ShellView>();
+    }
     
-    private void Explode()
-    {
-        Destroy(gameObject);
-    }
-
-    private void SpawnDamageParticles()
-    {
-        Instantiate(explosion, transform.position, Quaternion.identity);
-    }
+    
     
     
 }

@@ -15,7 +15,7 @@ public class Destroyables : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        ShellController shell = other.gameObject.GetComponent<ShellController>();
+        ShellView shell = other.gameObject.GetComponent<ShellView>();
         
         if (shell)
         {

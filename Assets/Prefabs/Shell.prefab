@@ -67,7 +67,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 9ed1e8a25f964bd4298944675e425a0d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2080484652483106648}
+      addedObject: {fileID: 9094102746410450669}
   m_SourcePrefab: {fileID: 100100000, guid: 9ed1e8a25f964bd4298944675e425a0d, type: 3}
 --- !u!1 &6691933039618786073 stripped
 GameObject:
@@ -123,7 +123,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2987081, y: 0.26465786, z: 0.5166997}
   m_Center: {x: 0, y: 0.008731306, z: 0.19371921}
---- !u!114 &2080484652483106648
+--- !u!114 &9094102746410450669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,10 +132,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6691933039618786073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe29f4b8836cd74684e96d6b8a21cdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 19a26dfc617b47c43b975bac52edba00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 876944751265867935, guid: a325166043ffcc448a7670e9fecd8815,
-    type: 3}
-  fireParticle: {fileID: 7731502986580185585, guid: ee6933974236ce54286eae798bb3287e,
+  shellExploision: {fileID: 876944751265867935, guid: a325166043ffcc448a7670e9fecd8815,
     type: 3}
