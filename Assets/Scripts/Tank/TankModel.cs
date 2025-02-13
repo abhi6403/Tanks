@@ -4,19 +4,19 @@ public class TankModel
 {
     private TankController tankController;
 
-    public float movementSpeed;
-    public float rotationSpeed;
+    private float movementSpeed;
+    private float rotationSpeed;
     
-    public TankTypes tankType;
-    public Material tankMaterial;
+    private TankTypes tankType;
+    private Material tankMaterial;
 
-    public float minLaunchForce = 15f;
-    public float maxLaunchForce = 30f;
-    public float maxChargeTime = 0.75f;
+    private float minLaunchForce = 15f;
+    private float maxLaunchForce = 30f;
+    private float maxChargeTime = 0.75f;
 
-    public float currentLaunchForce;
-    public float chargeSpeed;
-    public bool fired;
+    private float currentLaunchForce;
+    private float chargeSpeed;
+    private bool fired;
 
     public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial)
     {
@@ -28,6 +28,53 @@ public class TankModel
         currentLaunchForce = minLaunchForce; 
 
         chargeSpeed = (maxLaunchForce - minLaunchForce) / maxChargeTime;
+    }
+
+    public Material GetTankMaterial()
+    {
+        return tankMaterial;
+    }
+    public float getMovementSpeed()
+    {
+        return movementSpeed;
+    }
+
+    public float getRotationSpeed()
+    {
+        return rotationSpeed;
+    }
+
+    public float getChargeSpeed()
+    {
+        return chargeSpeed;
+    }
+
+    public void setFiredState(bool _fired)
+    {
+        this.fired = _fired;
+    }
+
+    public bool getFiredState()
+    {
+        return fired;
+    }
+    public float getCurrentLaunchForce()
+    {
+        return currentLaunchForce;
+    }
+
+    public void setCurrentLaunchForce(float _currentLaunchForce)
+    {
+        currentLaunchForce = _currentLaunchForce;
+    }
+    public float getMinLaunchForce()
+    {
+        return minLaunchForce;
+    }
+
+    public float getMaxLaunchForce()
+    {
+        return maxLaunchForce;
     }
     public void setTankController(TankController _tankController)
     {

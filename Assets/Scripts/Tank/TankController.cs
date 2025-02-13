@@ -16,7 +16,7 @@ public class TankController
         tankModel.setTankController(this);
         tankView.setTankController(this);
 
-        tankView.ChangeColor(tankModel.tankMaterial);
+        tankView.ChangeColor(tankModel.GetTankMaterial());
     }
 
     public void Move(float movement,float movementSpeed)
@@ -33,22 +33,23 @@ public class TankController
 
     public void FireProcess()
     {
-        tankView.aimSlider.value = tankModel.minLaunchForce;
+        tankView.getSlider().value = tankModel.getMinLaunchForce();
 
-        if (tankModel.currentLaunchForce >= tankModel.maxLaunchForce && !tankModel.fired)
+        if (tankModel.getCurrentLaunchForce() >= tankModel.getMaxLaunchForce() && !tankModel.getFiredState())
         {
-            tankModel.currentLaunchForce = tankModel.maxLaunchForce;
+            tankModel.setCurrentLaunchForce(tankModel.getMaxLaunchForce());
             tankView.Fire();
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            tankModel.fired = false;
-            tankModel.currentLaunchForce = tankModel.minLaunchForce;
+            tankModel.setFiredState(false);
+            tankModel.setCurrentLaunchForce( tankModel.getMinLaunchForce()); 
         }
-        else if (Input.GetButton("Jump") && !tankModel.fired)
+        else if (Input.GetButton("Jump") && !tankModel.getFiredState())
         {
-            tankModel.currentLaunchForce += tankModel.chargeSpeed * Time.deltaTime;
-            tankView.aimSlider.value = tankModel.currentLaunchForce;
+            float tempLaunchForce = tankModel.getCurrentLaunchForce() + tankModel.getChargeSpeed() * Time.deltaTime;
+            tankModel.setCurrentLaunchForce(tempLaunchForce);
+            tankView.getSlider().value = tankModel.getCurrentLaunchForce();
         }
         else if (Input.GetButtonUp("Jump"))
         {
