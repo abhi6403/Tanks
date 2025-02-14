@@ -10,7 +10,7 @@ public class Destroyables : MonoBehaviour
     public float health;
     public ParticleSystem explosionparticle;
     public UIController uIController;
-    private float damagePower = 50f;
+    private float damage;
     
 
     public void OnCollisionEnter(Collision other)
@@ -24,11 +24,15 @@ public class Destroyables : MonoBehaviour
                 SpawnDamageParticles();
                 Destroy(gameObject);
             }
-            health -= damagePower;
-            uIController.UpdateScoreText(damagePower);
+            health -= damage;
+            uIController.UpdateScoreText(damage);
         }
     }
 
+    public void setDamage(float _damage)
+    {
+        damage = _damage;
+    }
     private void SpawnDamageParticles()
     {
         Instantiate(explosionparticle, transform.position, Quaternion.identity);

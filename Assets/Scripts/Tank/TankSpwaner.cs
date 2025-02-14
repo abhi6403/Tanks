@@ -8,10 +8,14 @@ public class TankSpwaner : MonoBehaviour
     {
         public float movementSpeed;
         public float rotationSpeed;
+        public float minLaunchForce;
+        public float maxLaunchForce;
 
         public TankTypes tankType;
         public Material color;
     }
+
+    [SerializeField] private ShellSpawner shellSpawner;
     
     public TankView tankView;
 
@@ -19,22 +23,38 @@ public class TankSpwaner : MonoBehaviour
  
     public void CreateTank(TankTypes tankType)
     {
-        if (tankType == TankTypes.BLUETANK)
+        Tank tank = null;
+
+        switch (tankType)
         {
-            TankModel tankModel = new TankModel(tanksList[2].movementSpeed,tanksList[2].rotationSpeed,tanksList[2].tankType,tanksList[2].color);
-            TankController controller = new TankController(tankModel, tankView);
+            case TankTypes.GREENTANK:
+                tank = tanksList[0];
+                break;
+            case TankTypes.BLUETANK:
+                tank = tanksList[1];
+                break;
+            case TankTypes.REDTANK:
+                tank = tanksList[2];
+                break;
         }
-       
-        if (tankType == TankTypes.GREENTANK)
+
+        if (tank != null)
         {
-            TankModel tankModel = new TankModel(tanksList[0].movementSpeed,tanksList[0].rotationSpeed,tanksList[0].tankType,tanksList[0].color);
-            TankController controller = new TankController(tankModel, tankView);
+            TankModel tankModel = new TankModel(
+                tank.tankType,
+                tank.color,
+                tank.movementSpeed,
+                tank.rotationSpeed,
+                tank.minLaunchForce,
+                tank.maxLaunchForce
+            );
+            
+            TankController tankController = new TankController(tankModel,tankView);
         }
-        
-        if (tankType == TankTypes.REDTANK)
-        {
-            TankModel tankModel = new TankModel(tanksList[1].movementSpeed,tanksList[1].rotationSpeed,tanksList[1].tankType,tanksList[1].color);
-            TankController controller = new TankController(tankModel, tankView);
-        }
+    }
+
+    public ShellSpawner getShellSpawner()
+    {
+        return shellSpawner;
     }
 }

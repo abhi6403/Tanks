@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using static ShellSpawner;
 
 public class TankView : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class TankView : MonoBehaviour
     [SerializeField] private Transform fireTransform;
     [SerializeField] private Slider aimSlider;
 
-    [SerializeField] public Rigidbody shell;
-   
+    [SerializeField] private Rigidbody shell;
+    [SerializeField] private ShellSpawner shellSpawner;
 
     private void Start()
     {
@@ -63,13 +64,20 @@ public class TankView : MonoBehaviour
     
     public void Fire()
     {
+        Debug.Log("Shell Spawned");
         tankController.GetTankModel().setFiredState(true);
-        
-        Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
-        shellInstance.velocity = tankController.GetTankModel().getCurrentLaunchForce() * fireTransform.forward;
+        //Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
+        Vector3 velocity = tankController.GetTankModel().getCurrentLaunchForce() * fireTransform.transform.forward;
+        shellSpawner.SpawnShell(ShellTypes.REDTANKSHELL,velocity,shellSpawner.transform);
     }
 
+    public void setShellSpawner(ShellSpawner spawner)
+    {
+        
+        shellSpawner = spawner;
+    }
+    
     public Rigidbody getRigidbody()
     {
         return rb;

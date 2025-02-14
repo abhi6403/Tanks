@@ -9,11 +9,17 @@ public class ShellController
 {
     private ShellView shellView;
     private ShellModel shellModel;
+    private Rigidbody shellRigidBody;
 
-    public ShellController(ShellView shellView, ShellModel shellModel,Transform shellTransform)
+    public ShellController(ShellView _shellView, ShellModel _shellModel)
     {
-        this.shellModel = shellModel;
-        this.shellView = Fire(shellView,shellTransform);
+        shellModel = _shellModel;
+        shellModel.SetShellController(this);
+        Transform originTransform = getOriginTransform();
+        shellView = GameObject.Instantiate<ShellView>(_shellView);
+        shellView.SetShellController(this);
+        shellRigidBody = shellView.getShellRigidbody();
+        shellRigidBody.velocity = getVelocity();
     }
 
     private ShellView Fire(ShellView shellView, Transform shellTransform)
@@ -22,8 +28,30 @@ public class ShellController
         
         return shellGameObject.GetComponent<ShellView>();
     }
-    
-    
+
+    public float getExplosionRadius()
+    {
+        return shellModel.getExplosionRadius();
+    }
+
+    public Transform getOriginTransform()
+    {
+        return shellModel.getOriginPoint();
+    }
+
+    public Vector3 getVelocity()
+    {
+        return shellModel.getVelocity();
+    }
+    public float getExplosionForce()
+    {
+        return shellModel.getExplosionForce();
+    }
+
+    public float getDamagePower()
+    {
+        return shellModel.getDamagePower();
+    }
     
     
 }

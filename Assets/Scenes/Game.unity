@@ -1304,6 +1304,65 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1032831209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032831211}
+  - component: {fileID: 1032831210}
+  m_Layer: 0
+  m_Name: ShellSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1032831210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032831209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: becf24fea7dd9a04e985dd3150c6f094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shellView: {fileID: 9094102746410450669, guid: 28fefa089149ea847ae843638066c83a,
+    type: 3}
+  shells:
+  - shellType: 0
+    damagePower: 100
+    explosionRadius: 10
+    explosionForce: 0
+  - shellType: 1
+    damagePower: 20
+    explosionRadius: 1
+    explosionForce: 0
+  - shellType: 2
+    damagePower: 50
+    explosionRadius: 5
+    explosionForce: 0
+--- !u!4 &1032831211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032831209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0031000674, y: 1.4333335, z: 2.8769128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1132741370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2807,19 +2866,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad225eade72e848488c7fcc11f33c498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shellSpawner: {fileID: 1032831210}
   tankView: {fileID: 2262637418626244599, guid: 5f6f31c77b9ac524b9c770a09e7603e6,
     type: 3}
   tanksList:
   - movementSpeed: 30
     rotationSpeed: 75
+    minLaunchForce: 0
+    maxLaunchForce: 0
     tankType: 0
     color: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
   - movementSpeed: 10
     rotationSpeed: 50
+    minLaunchForce: 0
+    maxLaunchForce: 0
     tankType: 1
     color: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
   - movementSpeed: 60
     rotationSpeed: 120
+    minLaunchForce: 0
+    maxLaunchForce: 0
     tankType: 2
     color: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
 --- !u!4 &2009169650
@@ -2921,3 +2987,4 @@ SceneRoots:
   - {fileID: 2009169650}
   - {fileID: 1009262948}
   - {fileID: 1653019543}
+  - {fileID: 1032831211}

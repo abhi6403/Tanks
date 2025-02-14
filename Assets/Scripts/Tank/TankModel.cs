@@ -10,26 +10,39 @@ public class TankModel
     private TankTypes tankType;
     private Material tankMaterial;
 
-    private float minLaunchForce = 15f;
-    private float maxLaunchForce = 30f;
-    private float maxChargeTime = 0.75f;
+    private float minLaunchForce;
+    private float maxLaunchForce;
+    private float maxChargeTime;
 
     private float currentLaunchForce;
     private float chargeSpeed;
     private bool fired;
 
-    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial)
+    public TankModel(
+        TankTypes _tankType,
+        Material _tankMaterial,
+        float _movement,
+        float _rotation,
+        float _minLaunchForce,
+        float _maxLaunchForce
+        )
     {
         movementSpeed = _movement;
         rotationSpeed = _rotation;
         tankType = _tankType;
         tankMaterial = _tankMaterial;
+        minLaunchForce = _minLaunchForce;
+        maxLaunchForce = _maxLaunchForce;
 
         currentLaunchForce = minLaunchForce; 
 
         chargeSpeed = (maxLaunchForce - minLaunchForce) / maxChargeTime;
     }
 
+    public TankTypes getTankType()
+    {
+        return tankType;
+    }
     public Material GetTankMaterial()
     {
         return tankMaterial;
