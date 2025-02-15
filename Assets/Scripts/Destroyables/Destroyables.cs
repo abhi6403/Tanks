@@ -15,10 +15,8 @@ public class Destroyables : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        ShellController shell = other.gameObject.GetComponent<ShellController>();
+        ShellView shell = other.gameObject.GetComponent<ShellView>();
         
-        if (shell)
-        {
             if (health <= 0)
             {
                 SpawnDamageParticles();
@@ -26,7 +24,6 @@ public class Destroyables : MonoBehaviour
             }
             health -= damagePower;
             uIController.UpdateScoreText(damagePower);
-        }
     }
 
     private void SpawnDamageParticles()

@@ -3,26 +3,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShellController : MonoBehaviour
+public class ShellController 
 {
-    public ParticleSystem explosion;
+    private ShellView shellView; 
+    private ShellModel shellModel;
 
-    private void OnCollisionEnter(Collision collision)
+    private Rigidbody shellRigidBody;
+
+    public ShellController(ShellModel _shellModel, ShellView _shellView)
     {
-        SpawnDamageParticles();
-        Explode();
+        shellModel = _shellModel;
+        shellView = GameObject.Instantiate<ShellView>(_shellView, getPosition(), getRotation());
+        
+        shellModel.setShellController(this);
+        shellView.setShellController(this);
+        
+        SpawnShell();
+        
     }
 
-    
-    private void Explode()
+    private void SpawnShell()
     {
-        Destroy(gameObject);
+        shellRigidBody = shellView.getRigidbody();
+        shellRigidBody.velocity = getLaunchForce() * getDirection();
     }
 
-    private void SpawnDamageParticles()
+    public Vector3 getPosition()
     {
-        Instantiate(explosion, transform.position, Quaternion.identity);
+        return shellModel.getPosition();
     }
-    
+
+    public Vector3 getDirection()
+    {
+        return shellModel.getDirection();
+    }
+
+    public Quaternion getRotation()
+    {
+        return shellModel.getRotation();
+    }
+
+    public float getLaunchForce()
+    {
+        return shellModel.getLaunchForce();
+    }
     
 }

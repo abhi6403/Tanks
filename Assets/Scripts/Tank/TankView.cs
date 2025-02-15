@@ -16,6 +16,7 @@ public class TankView : MonoBehaviour
     [SerializeField] private Slider aimSlider;
 
     [SerializeField] private Rigidbody shell;
+    [SerializeField] private ShellSpawner shellSpawner;
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
@@ -28,12 +29,18 @@ public class TankView : MonoBehaviour
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 3f, -4f);
         aimSlider.value = tankController.getMinLaunchForce();
+        shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
     }
 
     private void Update()
     {
         Movement();
+        MoveTank();
+        tankController.FireProcess();
+    }
 
+    private void MoveTank()
+    {
         if (movement != 0)
         {
             tankController.Move(movement,tankController.getMovementSpeed());
@@ -43,10 +50,7 @@ public class TankView : MonoBehaviour
         {
             tankController.Rotate(rotation,tankController.getRotationSpeed());
         }
-        
-        tankController.FireProcess();
     }
-
     private void Movement()
     {
         movement = Input.GetAxis("Vertical");
@@ -64,10 +68,8 @@ public class TankView : MonoBehaviour
     public void Fire()
     {
         tankController.setFiredState(true);
-        
-        Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
-        shellInstance.velocity = tankController.getCurrentLaunchForce() * fireTransform.forward;
+        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward);
     }
 
     public Slider getAimSlider()
