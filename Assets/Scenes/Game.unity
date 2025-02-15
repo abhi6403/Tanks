@@ -2781,6 +2781,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellView: {fileID: 8348552735483371719, guid: 28fefa089149ea847ae843638066c83a,
     type: 3}
+  shellList:
+  - shellType: 0
+    damagePower: 50
+  - shellType: 1
+    damagePower: 20
+  - shellType: 2
+    damagePower: 100
 --- !u!4 &1960515260
 Transform:
   m_ObjectHideFlags: 0
@@ -2853,14 +2860,17 @@ MonoBehaviour:
   tanksList:
   - movementSpeed: 30
     rotationSpeed: 75
+    shellType: 2
     tankType: 0
     color: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
   - movementSpeed: 10
     rotationSpeed: 50
+    shellType: 0
     tankType: 1
     color: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
   - movementSpeed: 60
     rotationSpeed: 120
+    shellType: 1
     tankType: 2
     color: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
 --- !u!4 &2009169650

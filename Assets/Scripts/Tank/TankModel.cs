@@ -18,14 +18,17 @@ public class TankModel
     private float currentLaunchForce;
     private float chargeSpeed;
     private bool fired;
+    private ShellType shellType;
 
-    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial)
+    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType)
     {
         movementSpeed = _movement;
         rotationSpeed = _rotation;
         tankType = _tankType;
         tankMaterial = _tankMaterial;
+        shellType = _shellType;
 
+        Debug.Log(_shellType);
         currentLaunchForce = minLaunchForce; 
 
         chargeSpeed = (maxLaunchForce - minLaunchForce) / maxChargeTime;
@@ -39,7 +42,7 @@ public class TankModel
     {
         currentLaunchForce = _currentLaunchForce;
     }
-
+    
     public TankTypes getTankType()
     {
         return tankType;
