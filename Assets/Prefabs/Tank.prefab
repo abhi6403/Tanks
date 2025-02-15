@@ -430,9 +430,9 @@ MonoBehaviour:
   rb: {fileID: -6539351600588824667}
   childs:
   - {fileID: 4959132435605449605}
+  - {fileID: 4959132435605449603}
+  - {fileID: 4959132435605449613}
   - {fileID: 4959132435605449607}
-  ShellController: {fileID: 2080484652483106648, guid: 28fefa089149ea847ae843638066c83a,
-    type: 3}
   fireTransform: {fileID: 6544317465860475146}
   aimSlider: {fileID: 1289341129724263172}
   shell: {fileID: 8142298251708592852, guid: 28fefa089149ea847ae843638066c83a, type: 3}
@@ -490,6 +490,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4959132435603420133}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &4959132435605449603 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300006, guid: 002e2a607f5b64c48be0b3b0d8b8bfdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4959132435603420133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &4959132435605449605 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300000, guid: 002e2a607f5b64c48be0b3b0d8b8bfdd,
@@ -499,6 +505,12 @@ MeshRenderer:
 --- !u!23 &4959132435605449607 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300002, guid: 002e2a607f5b64c48be0b3b0d8b8bfdd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4959132435603420133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4959132435605449613 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300008, guid: 002e2a607f5b64c48be0b3b0d8b8bfdd,
     type: 3}
   m_PrefabInstance: {fileID: 4959132435603420133}
   m_PrefabAsset: {fileID: 0}

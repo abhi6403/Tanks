@@ -9,13 +9,13 @@ public class TankView : MonoBehaviour
     private float movement;
     private float rotation;
     
-    public Rigidbody rb;
-    public MeshRenderer[] childs;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private MeshRenderer[] childs;
 
-    public Transform fireTransform;
-    public Slider aimSlider;
+    [SerializeField] private Transform fireTransform;
+    [SerializeField] private Slider aimSlider;
 
-    public Rigidbody shell;
+    [SerializeField] private Rigidbody shell;
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
@@ -27,7 +27,7 @@ public class TankView : MonoBehaviour
         cameraShake = cam.GetComponent<CameraShake>();
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 3f, -4f);
-        tankController.GetTankView().aimSlider.value = tankController.GetTankModel().minLaunchForce;
+        aimSlider.value = tankController.getMinLaunchForce();
     }
 
     private void Update()
@@ -36,12 +36,12 @@ public class TankView : MonoBehaviour
 
         if (movement != 0)
         {
-            tankController.Move(movement,tankController.GetTankModel().movementSpeed);
+            tankController.Move(movement,tankController.getMovementSpeed());
         }
 
         if (rotation != 0)
         {
-            tankController.Rotate(rotation,tankController.GetTankModel().rotationSpeed);
+            tankController.Rotate(rotation,tankController.getRotationSpeed());
         }
         
         tankController.FireProcess();
@@ -63,13 +63,17 @@ public class TankView : MonoBehaviour
     
     public void Fire()
     {
-        tankController.GetTankModel().fired = true;
+        tankController.setFiredState(true);
         
         Rigidbody shellInstance = Instantiate(shell, fireTransform.position, fireTransform.rotation) as Rigidbody;
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
-        shellInstance.velocity = tankController.GetTankModel().currentLaunchForce * fireTransform.forward;
+        shellInstance.velocity = tankController.getCurrentLaunchForce() * fireTransform.forward;
     }
 
+    public Slider getAimSlider()
+    {
+        return aimSlider;
+    }
     public Rigidbody getRigidbody()
     {
         return rb;
