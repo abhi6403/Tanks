@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 public class TankController 
 {
@@ -16,7 +18,7 @@ public class TankController
         tankModel.setTankController(this);
         tankView.setTankController(this);
 
-        tankView.ChangeColor(tankModel.tankMaterial);
+        tankView.ChangeColor(tankModel.getTankMaterial());
     }
 
     public void Move(float movement,float movementSpeed)
@@ -33,29 +35,87 @@ public class TankController
 
     public void FireProcess()
     {
-        tankView.aimSlider.value = tankModel.minLaunchForce;
+        getAimSlider().value = tankModel.getMinLaunchForce();
 
-        if (tankModel.currentLaunchForce >= tankModel.maxLaunchForce && !tankModel.fired)
+        if (getCurrentLaunchForce() >= getMaxLaunchForce() && !getFiredState())
         {
-            tankModel.currentLaunchForce = tankModel.maxLaunchForce;
+            setCurrentLaunchForce(getMaxLaunchForce());
             tankView.Fire();
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            tankModel.fired = false;
-            tankModel.currentLaunchForce = tankModel.minLaunchForce;
+            setFiredState(false);
+            setCurrentLaunchForce(getMinLaunchForce());
         }
-        else if (Input.GetButton("Jump") && !tankModel.fired)
+        else if (Input.GetButton("Jump") && !getFiredState())
         {
-            tankModel.currentLaunchForce += tankModel.chargeSpeed * Time.deltaTime;
-            tankView.aimSlider.value = tankModel.currentLaunchForce;
+            float temp = getCurrentLaunchForce() + getMaxChargeSpeed() * Time.deltaTime;
+            setCurrentLaunchForce(temp);
+            getAimSlider().value = getCurrentLaunchForce();
         }
         else if (Input.GetButtonUp("Jump"))
         {
             tankView.Fire();
         }
     }
-    
+
+    public void setCurrentLaunchForce(float newLaunchForce)
+    {
+        tankModel.setCurrentLaunchForce(newLaunchForce);
+    }
+    public TankTypes getTankType()
+    {
+        return tankModel.getTankType();
+    }
+    public float getMinLaunchForce()
+    {
+        return tankModel.getMinLaunchForce();
+    }
+
+    public float getMaxLaunchForce()
+    {
+        return tankModel.getMaxLaunchForce();
+    }
+
+    public float getCurrentLaunchForce()
+    {
+        return tankModel.getCurrentLaunchForce();
+    }
+
+    public float getMaxChargeSpeed()
+    {
+        return tankModel.getChargeSpeed();
+    }
+
+    public float getMaxChargeTime()
+    {
+        return tankModel.getMaxChargeTime();
+    }
+
+    public bool getFiredState()
+    {
+       return tankModel.getFiredState();
+    }
+
+    public void setFiredState(bool state)
+    {
+        tankModel.setFiredState(state);
+    }
+
+    public float getMovementSpeed()
+    {
+        return tankModel.getMovementSpeed();
+    }
+
+    public float getRotationSpeed()
+    {
+        return tankModel.getRotationSpeed();
+    }
+
+    public Slider getAimSlider()
+    {
+        return tankView.getAimSlider();
+    }
     public TankModel GetTankModel()
     {
         return tankModel;
