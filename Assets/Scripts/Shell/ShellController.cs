@@ -27,7 +27,11 @@ public class ShellController
         shellRigidBody = shellView.getRigidbody();
         shellRigidBody.velocity = getLaunchForce() * getDirection();
     }
-    
+
+    public ShellParentType getShellParentType()
+    {
+        return shellModel.getShellParentType();
+    }
     public Vector3 getPosition()
     {
         return shellModel.getPosition();

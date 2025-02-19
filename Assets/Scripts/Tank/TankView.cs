@@ -17,7 +17,6 @@ public class TankView : MonoBehaviour
 
     [SerializeField] private Rigidbody shell;
     [SerializeField] private ShellSpawner shellSpawner;
-    private ShellType shellType;
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
@@ -70,7 +69,7 @@ public class TankView : MonoBehaviour
     {
         tankController.setFiredState(true);
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f)); 
-        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,shellType);
+        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,ShellParentType.PLAYERTANK);
     }
 
     public float getDamagePower()

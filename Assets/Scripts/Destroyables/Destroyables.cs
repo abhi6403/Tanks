@@ -17,7 +17,7 @@ public class Destroyables : MonoBehaviour
     {
         ShellView shell = other.gameObject.GetComponent<ShellView>();
         
-        if (shell)
+        if (shell.getShellParentType() == ShellParentType.PLAYERTANK)
         {
             processDamage();
         }

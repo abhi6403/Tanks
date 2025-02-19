@@ -23,7 +23,10 @@ public class ShellView : MonoBehaviour
         Explode();
     }
 
-    
+    public ShellParentType getShellParentType()
+    {
+        return shellController.getShellParentType();
+    }
     private void Explode()
     {
         Destroy(gameObject);

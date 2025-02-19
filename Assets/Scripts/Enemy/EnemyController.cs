@@ -19,7 +19,11 @@ public class EnemyController
       enemyView.ChangeColor(enemyModel.getMaterial());
       
    }
-   
+
+   public EnemyType getEnemyType()
+   {
+      return enemyModel.getEnemyType();
+   }
    public float getLaunchForce()
    {
       return enemyModel.getLaunchForce();

@@ -10,10 +10,21 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private MeshRenderer[] childs;
     [SerializeField] private Transform fireTransform;
     [SerializeField] private ShellSpawner shellSpawner;
+    private float timer;
+    private float waitTime = 5f;
 
     private void Start()
     {
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
+    }
+
+    private void Update()
+    {
+        if (Time.time > timer + waitTime)
+        {
+            Fire();
+            timer = Time.time;
+        }
     }
 
     public void setEnemyController(EnemyController _enemyController)
@@ -31,7 +42,7 @@ public class EnemyView : MonoBehaviour
     
     public void Fire()
     {
-        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,enemyController.getLaunchForce(),fireTransform.forward,ShellType.ENEMYSHELL);
+        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,enemyController.getLaunchForce(),fireTransform.forward,ShellParentType.ENEMYTANK);
     }
     
     public void setTankPoisition(Transform poi)
