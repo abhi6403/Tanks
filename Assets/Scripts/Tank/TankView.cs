@@ -28,7 +28,7 @@ public class TankView : MonoBehaviour
         GameObject cam = GameObject.Find("Main Camera");
         cameraShake = cam.GetComponent<CameraShake>();
         cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(0f, 3f, -4f);
+        cam.transform.position = new Vector3(0f, 4f, -8f);
         aimSlider.value = tankController.getMinLaunchForce();
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
     }

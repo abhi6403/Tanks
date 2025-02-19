@@ -11,7 +11,6 @@ public class Destroyables : MonoBehaviour
     public ParticleSystem explosionparticle;
     public UIController uIController;
     private float damagePower;
-    private TankController tankController;
     
 
     public void OnCollisionEnter(Collision other)

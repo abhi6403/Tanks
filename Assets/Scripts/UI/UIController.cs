@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class UIController : MonoBehaviour
 {
     public TankSpwaner tankSpwaner;
+    public EnemySpawner enemySpawner;
     public GameObject lobbyPannel;
     public GameObject mainMenuPanel;
     public GameObject gameMenuUI;
@@ -56,25 +57,26 @@ public class UIController : MonoBehaviour
     public void BlueTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.BLUETANK);
-        OpenGameMenu();
+        OpenGame();
     }
     
     public void GreenTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.GREENTANK);
-        OpenGameMenu();
+        OpenGame();
     }
     
     public void RedTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.REDTANK);
-        OpenGameMenu();
+        OpenGame();
     }
 
-    public void OpenGameMenu()
+    public void OpenGame()
     {
         lobbyPannel.SetActive(false);
         gameMenuUI.SetActive(true);
+        enemySpawner.createEnemy();
         gameStarted = true;
     }
 

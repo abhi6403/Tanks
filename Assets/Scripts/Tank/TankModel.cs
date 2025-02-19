@@ -29,8 +29,7 @@ public class TankModel
         tankMaterial = _tankMaterial;
         shellType = _shellType;
         damagePower = _damagePower;
-
-        Debug.Log(_shellType);
+        
         currentLaunchForce = minLaunchForce; 
 
         chargeSpeed = (maxLaunchForce - minLaunchForce) / maxChargeTime;
