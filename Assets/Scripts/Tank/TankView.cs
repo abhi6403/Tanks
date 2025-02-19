@@ -69,13 +69,13 @@ public class TankView : MonoBehaviour
     public void Fire()
     {
         tankController.setFiredState(true);
-        StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
+        StartCoroutine(cameraShake.Shake(0.1f, 0.1f)); 
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,shellType);
     }
 
-    public void setShellType(ShellType _shellType)
+    public TankTypes getTankType()
     {
-        shellType = _shellType;
+        return tankController.getTankType();
     }
     public Slider getAimSlider()
     {

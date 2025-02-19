@@ -10,28 +10,20 @@ public class ShellModel
     private Vector3 direction;
     private Quaternion rotation;
     private float launchForce;
-    private ShellType shellType;
-    private float damagePower;
     
-    public ShellModel(Vector3 _position, Quaternion _rotation,float _launchForce, Vector3 _forward,ShellType _shellType,float _damagePower)
+    public ShellModel(Vector3 _position, Quaternion _rotation,float _launchForce, Vector3 _forward)
     {
         position = _position;
         rotation = _rotation;
         launchForce = _launchForce;
         direction = _forward;
-        shellType = _shellType;
-        damagePower = _damagePower;
     }
 
     public void setShellController(ShellController _shellController)
     {
         shellController = _shellController;
     }
-
-    public float getDamagePower()
-    {
-        return damagePower;
-    }
+    
     public Vector3 getPosition()
     {
         return position;
