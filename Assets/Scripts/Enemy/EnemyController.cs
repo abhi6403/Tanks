@@ -15,10 +15,11 @@ public class EnemyController
       enemyModel.setEnemyController(this);
       enemyView.setEnemyController(this);
       
+      enemyView.setTankPoisition(enemyModel.getSpawnPoint());
       enemyView.ChangeColor(enemyModel.getMaterial());
+      
    }
-
-
+   
    public float getLaunchForce()
    {
       return enemyModel.getLaunchForce();

@@ -10,15 +10,17 @@ public class EnemyModel
     private float rotationSpeed;
     private float damagePower;
     private Material material;
+    private Transform spawnPoint;
 
     private float launchForce = 15;
 
-    public EnemyModel(float _movementSpeed, float _rotationSpeed, float _damagePower, Material _material)
+    public EnemyModel(float _movementSpeed, float _rotationSpeed, float _damagePower, Material _material, Transform _spawnPoint)
     {
         movementSpeed = _movementSpeed;
         rotationSpeed = _rotationSpeed;
         damagePower = _damagePower;
         material = _material;
+        spawnPoint = _spawnPoint;
     }
 
     public void setEnemyController(EnemyController _enemyController)
@@ -29,6 +31,11 @@ public class EnemyModel
     public float getLaunchForce()
     {
         return launchForce;
+    }
+
+    public Transform getSpawnPoint()
+    {
+        return spawnPoint;
     }
     public float getMovementSpeed()
     {

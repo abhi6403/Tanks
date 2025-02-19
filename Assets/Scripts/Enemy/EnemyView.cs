@@ -14,7 +14,6 @@ public class EnemyView : MonoBehaviour
     private void Start()
     {
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
-        Fire();
     }
 
     public void setEnemyController(EnemyController _enemyController)
@@ -33,5 +32,10 @@ public class EnemyView : MonoBehaviour
     public void Fire()
     {
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,enemyController.getLaunchForce(),fireTransform.forward,ShellType.ENEMYSHELL);
+    }
+    
+    public void setTankPoisition(Transform poi)
+    {
+       gameObject.transform.position = poi.position;
     }
 }

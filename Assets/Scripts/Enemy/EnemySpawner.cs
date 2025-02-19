@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
         public float rotationSpeed;
         public float damagePower;
         public Material color;
+        public Transform spawnPoint;
     }
 
     public EnemyView enemyView;
@@ -23,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i <= enemyList.Count; i++)
         {
             EnemyModel enemyModel =
-                new EnemyModel(enemyList[i].movementSpeed, enemyList[i].rotationSpeed, enemyList[i].damagePower, enemyList[i].color);
+                new EnemyModel(enemyList[i].movementSpeed, enemyList[i].rotationSpeed, enemyList[i].damagePower, enemyList[i].color,enemyList[i].spawnPoint);
             EnemyController enemyController = new EnemyController(enemyModel, enemyView);
         }
     }
