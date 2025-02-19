@@ -11,6 +11,7 @@ public class Destroyables : MonoBehaviour
     public ParticleSystem explosionparticle;
     public UIController uIController;
     private float damagePower;
+    private TankController tankController;
     
 
     public void OnCollisionEnter(Collision other)
@@ -23,32 +24,15 @@ public class Destroyables : MonoBehaviour
         }
     }
     
-    public float initializeDamage(TankTypes tankType)
+    private float inidamage()
     {
-        switch (tankType)
-        {
-            case TankTypes.REDTANK:
-                damagePower = 50f;
-                Debug.Log("Damage Power: " + damagePower);
-                break;
-            case TankTypes.GREENTANK:
-                damagePower = 20f;
-                Debug.Log("Damage Power: " + damagePower);
-                break;
-            case TankTypes.BLUETANK:
-                damagePower = 15f;
-                Debug.Log("Damage Power: " + damagePower);
-                break;
-        }
-        
+        TankView tankView = FindObjectOfType<TankView>();
+        damagePower =  tankView.getDamagePower();
         return damagePower;
     }
-
     private void processDamage()
     {
-        TankView tankController = FindObjectOfType<TankView>();
-        initializeDamage(tankController.getTankType());
-        
+        inidamage();
         if (health <= 0)
         {
             Destroy(gameObject);

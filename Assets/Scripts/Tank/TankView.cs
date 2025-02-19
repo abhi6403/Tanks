@@ -73,6 +73,10 @@ public class TankView : MonoBehaviour
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,shellType);
     }
 
+    public float getDamagePower()
+    {
+        return tankController.getDamagePower();
+    }
     public TankTypes getTankType()
     {
         return tankController.getTankType();

@@ -107,6 +107,10 @@ public class TankController
         return tankModel.getMovementSpeed();
     }
 
+    public float getDamagePower()
+    {
+        return tankModel.getDamagePower();
+    }
     public float getRotationSpeed()
     {
         return tankModel.getRotationSpeed();

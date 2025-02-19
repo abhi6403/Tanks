@@ -7,6 +7,7 @@ public class TankModel
 
     private float movementSpeed;
     private float rotationSpeed;
+    private float damagePower;
     
     private TankTypes tankType;
     private Material tankMaterial;
@@ -20,13 +21,14 @@ public class TankModel
     private bool fired;
     private ShellType shellType;
 
-    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType)
+    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType,float _damagePower)
     {
         movementSpeed = _movement;
         rotationSpeed = _rotation;
         tankType = _tankType;
         tankMaterial = _tankMaterial;
         shellType = _shellType;
+        damagePower = _damagePower;
 
         Debug.Log(_shellType);
         currentLaunchForce = minLaunchForce; 
@@ -42,7 +44,11 @@ public class TankModel
     {
         currentLaunchForce = _currentLaunchForce;
     }
-    
+
+    public float getDamagePower()
+    {
+        return damagePower;
+    }
     public TankTypes getTankType()
     {
         return tankType;

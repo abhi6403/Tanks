@@ -8,6 +8,7 @@ public class TankSpwaner : MonoBehaviour
     {
         public float movementSpeed;
         public float rotationSpeed;
+        public float damagePower;
         public ShellType shellType;
         public TankTypes tankType;
         public Material color;
@@ -19,21 +20,23 @@ public class TankSpwaner : MonoBehaviour
  
     public void CreateTank(TankTypes tankType)
     {
-        if (tankType == TankTypes.BLUETANK)
+        Tank tank = null;
+        switch (tankType)
         {
-            TankModel tankModel = new TankModel(tanksList[2].movementSpeed,tanksList[2].rotationSpeed,tanksList[2].tankType,tanksList[2].color,tanksList[2].shellType);
-            TankController controller = new TankController(tankModel, tankView);
+            case TankTypes.REDTANK:
+                tank = tanksList[1];
+                break;
+            case TankTypes.BLUETANK:
+                tank = tanksList[2];
+                break;
+            case TankTypes.GREENTANK:
+                tank = tanksList[0];
+                break;
         }
-       
-        if (tankType == TankTypes.GREENTANK)
+
+        if (tank != null)
         {
-            TankModel tankModel = new TankModel(tanksList[0].movementSpeed,tanksList[0].rotationSpeed,tanksList[0].tankType,tanksList[0].color,tanksList[0].shellType);
-            TankController controller = new TankController(tankModel, tankView);
-        }
-        
-        if (tankType == TankTypes.REDTANK)
-        {
-            TankModel tankModel = new TankModel(tanksList[1].movementSpeed,tanksList[1].rotationSpeed,tanksList[1].tankType,tanksList[1].color,tanksList[1].shellType);
+            TankModel tankModel = new TankModel(tank.movementSpeed,tank.rotationSpeed,tank.tankType,tank.color,tank.shellType,tank.damagePower);
             TankController controller = new TankController(tankModel, tankView);
         }
     }
