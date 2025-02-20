@@ -20,6 +20,10 @@ public class EnemyController
       
    }
 
+   public float getMoveSpeed()
+   {
+      return enemyModel.getMovementSpeed();
+   }
    public EnemyType getEnemyType()
    {
       return enemyModel.getEnemyType();

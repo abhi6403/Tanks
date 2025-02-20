@@ -15,9 +15,7 @@ public class Destroyables : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
-        ShellView shell = other.gameObject.GetComponent<ShellView>();
-        
-        if (shell.getShellParentType() == ShellParentType.PLAYERTANK)
+        if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
         {
             processDamage();
         }

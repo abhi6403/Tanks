@@ -72,6 +72,10 @@ public class TankController
         return tankModel.getMinLaunchForce();
     }
 
+    public Transform getTankTransform()
+    {
+        return tankView.getTankTransform();
+    }
     public float getMaxLaunchForce()
     {
         return tankModel.getMaxLaunchForce();

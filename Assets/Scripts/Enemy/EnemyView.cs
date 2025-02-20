@@ -12,10 +12,12 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private ShellSpawner shellSpawner;
     private float timer;
     private float waitTime = 5f;
+    private TankView tankView;
 
     private void Start()
     {
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
+        tankView = GameObject.FindObjectOfType<TankView>();
     }
 
     private void Update()
@@ -24,9 +26,17 @@ public class EnemyView : MonoBehaviour
         {
             Fire();
             timer = Time.time;
+            
         }
+        goTowardsTarget(tankView.getTankTransform());
     }
 
+    public void goTowardsTarget(Transform target)
+    {
+        float speed = enemyController.getMoveSpeed() * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position,target.position, speed);
+    }
+    
     public void setEnemyController(EnemyController _enemyController)
     {
         enemyController = _enemyController;

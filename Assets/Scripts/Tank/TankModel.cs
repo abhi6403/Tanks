@@ -38,7 +38,7 @@ public class TankModel
     {
         tankController = _tankController;
     }
-
+    
     public void setCurrentLaunchForce(float _currentLaunchForce)
     {
         currentLaunchForce = _currentLaunchForce;
