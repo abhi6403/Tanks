@@ -6,36 +6,72 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
     private EnemyController enemyController;
+    public Vector3 directionToPlayer { get; private set; }
+    public bool isPlayerFound { get; private set; }
 
     [SerializeField] private MeshRenderer[] childs;
     [SerializeField] private Transform fireTransform;
-    [SerializeField] private ShellSpawner shellSpawner;
+    
+    [SerializeField] private float targetDistance;
+    [SerializeField] private BoxCollider collider;
+    
+    private Rigidbody rb;
+    private Vector3 targetDirection;
     private float timer;
     private float waitTime = 5f;
     private TankView tankView;
 
     private void Start()
     {
-        shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
+        enemyController.Start();
         tankView = GameObject.FindObjectOfType<TankView>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-            if (Time.time > timer + waitTime)
-            {
-                Fire();
-                timer = Time.time;
-            }
+        CheckForPlayer();
+        enemyController.Update();
     }
-
-
-    public void goTowardsTarget(Transform target)
+    private void CheckForPlayer()
     {
-        float speed = enemyController.getMoveSpeed() * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position,target.position, speed);
+        Vector3 enemyToPlayerVector = tankView.transform.position - transform.position;
+        directionToPlayer = enemyToPlayerVector.normalized;
+        float distanceToPlayer = enemyToPlayerVector.magnitude;
+
+        float buffer = .2f;
+
+        if (distanceToPlayer <= targetDistance - buffer)
+        {
+
+            isPlayerFound = true;
+        }
+        else if (distanceToPlayer >= targetDistance + buffer)
+        {
+
+            isPlayerFound = false;
+        }
     }
     
+    private void FixedUpdate()
+    {
+        if (enemyController != null)
+        {
+            enemyController.UpdateTargetDirection();
+            enemyController.RotateTowardsTarget();
+        }
+    }
+    
+    /*private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.GetComponent<ShellView>() != null &&
+            other.gameObject.layer != LayerMask.NameToLayer("EnemyShell"))
+        {
+
+            enemyController.TakeDamage(10);
+
+        }
+    }*/
     public void setEnemyController(EnemyController _enemyController)
     {
         enemyController = _enemyController;
@@ -48,15 +84,24 @@ public class EnemyView : MonoBehaviour
             childs[i].material = color;
         }
     }
-    
-    public void Fire()
+
+    public TankView getTankView()
     {
-        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,enemyController.getLaunchForce(),fireTransform.forward,ShellParentType.ENEMYTANK);
+        return tankView;
     }
     
+    public Rigidbody GetRigidBody()
+    {
+        return rb;
+    }
     
     public void setTankPoisition(Transform poi)
     {
        gameObject.transform.position = poi.position;
+    }
+
+    public Transform getFireTransform()
+    {
+        return fireTransform;
     }
 }
