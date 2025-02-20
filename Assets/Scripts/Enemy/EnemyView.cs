@@ -22,14 +22,13 @@ public class EnemyView : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > timer + waitTime)
-        {
-            Fire();
-            timer = Time.time;
-            
-        }
-        goTowardsTarget(tankView.getTankTransform());
+            if (Time.time > timer + waitTime)
+            {
+                Fire();
+                timer = Time.time;
+            }
     }
+
 
     public void goTowardsTarget(Transform target)
     {
@@ -54,6 +53,7 @@ public class EnemyView : MonoBehaviour
     {
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,enemyController.getLaunchForce(),fireTransform.forward,ShellParentType.ENEMYTANK);
     }
+    
     
     public void setTankPoisition(Transform poi)
     {
