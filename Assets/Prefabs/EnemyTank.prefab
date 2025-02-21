@@ -262,9 +262,10 @@ MonoBehaviour:
   - {fileID: 7641310083000315046}
   - {fileID: 7641310083000315048}
   - {fileID: 7641310083000315042}
+  particleExplosion: {fileID: 3481923950544858363, guid: 8d74dbf99b428d242a88bb1caf33c9b5,
+    type: 3}
   fireTransform: {fileID: 528193963270916992}
   targetDistance: 15
-  collider: {fileID: 7858213554781578639}
 --- !u!4 &7641310083002740272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400112, guid: 002e2a607f5b64c48be0b3b0d8b8bfdd,

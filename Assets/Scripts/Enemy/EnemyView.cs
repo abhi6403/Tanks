@@ -10,6 +10,7 @@ public class EnemyView : MonoBehaviour
     public bool isPlayerFound { get; private set; }
 
     [SerializeField] private MeshRenderer[] childs;
+    [SerializeField] private ParticleSystem particleExplosion;
     [SerializeField] private Transform fireTransform;
     
     [SerializeField] private float targetDistance;
@@ -72,6 +73,7 @@ public class EnemyView : MonoBehaviour
         }
         else
         {
+            spawnDamageParticles();
             Destroy(gameObject);
         }
     }
@@ -80,6 +82,10 @@ public class EnemyView : MonoBehaviour
         enemyController = _enemyController;
     }
     
+    public void spawnDamageParticles()
+    {
+        Instantiate(particleExplosion, transform.position, Quaternion.identity);
+    }
     public void ChangeColor(Material color)
     {
         for (int i = 0; i < childs.Length; i++)
