@@ -8,4 +8,6 @@ public interface IDestroyables
     public void processDamage();
 
     public void spawnDamageParticles();
+    
+    public void TakeDamage(float damage);
 }

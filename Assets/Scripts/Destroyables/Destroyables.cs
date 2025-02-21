@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Destroyables : MonoBehaviour, IDestroyables
 {
@@ -11,8 +12,15 @@ public class Destroyables : MonoBehaviour, IDestroyables
     public ParticleSystem explosionparticle;
     public UIController uIController;
     private float damagePower;
-    
+    [SerializeField] private Slider healthSlider;
 
+
+
+    void Start()
+    {
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
+    }
     public void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
@@ -25,6 +33,7 @@ public class Destroyables : MonoBehaviour, IDestroyables
     {
         TankView tankView = FindObjectOfType<TankView>();
         damagePower =  tankView.getDamagePower();
+        TakeDamage(damagePower);
         return damagePower;
     }
     public void processDamage()
@@ -34,6 +43,7 @@ public class Destroyables : MonoBehaviour, IDestroyables
         {
             getDamagePower();
             health -= damagePower;
+            
             uIController.UpdateScoreText(damagePower);
         }
         else
@@ -45,7 +55,11 @@ public class Destroyables : MonoBehaviour, IDestroyables
         
         
     }
-    
+
+    public void TakeDamage(float damage)
+    {
+        healthSlider.value -= damage;
+    }
     public void spawnDamageParticles()
     {
         Instantiate(explosionparticle, transform.position, Quaternion.identity);
