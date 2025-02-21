@@ -18,6 +18,7 @@ public class TankView : MonoBehaviour
 
     [SerializeField] private Rigidbody shell;
     [SerializeField] private ShellSpawner shellSpawner;
+    private UIController uiController;
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
@@ -32,6 +33,7 @@ public class TankView : MonoBehaviour
         aimSlider.value = tankController.getMinLaunchForce();
         healthSlider.value = tankController.getHealth();
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
+        uiController = GameObject.FindObjectOfType<UIController>();
     }
 
     private void Update()
@@ -86,6 +88,7 @@ public class TankView : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            uiController.GameOverMenu();
         }
     }
 

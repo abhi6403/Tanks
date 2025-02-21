@@ -21,6 +21,8 @@ public class UIController : MonoBehaviour
     
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI TimeRemainingText;
+    public TextMeshProUGUI resultText;
+    public TextMeshProUGUI scoreText;
 
     private bool gameStarted = false;
     private float score = 0f;
@@ -84,6 +86,7 @@ public class UIController : MonoBehaviour
     {
         gameStarted = false;
         gameOverPanel.SetActive(true);
+        ShowResultText();
     }
     
     public void UpdateScoreText(float increment)
@@ -92,6 +95,11 @@ public class UIController : MonoBehaviour
         ScoreText.text = "Score: " + score;
     }
 
+    public void ShowResultText()
+    {
+        scoreText.text =  ""+score;
+        resultText.text = "Mastered!!!";
+    }
     public void UpdateTimeRemainingText()
     {
         timeRemaining -= Time.deltaTime;
