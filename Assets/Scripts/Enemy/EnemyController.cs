@@ -93,6 +93,7 @@ public class EnemyController
    public void TakeDamage(int damage)
    {
        enemyModel.setHealth(damage);
+       enemyView.getHealthSlider().value = enemyModel.getHealth();
    }
    public float getMoveSpeed()
    {

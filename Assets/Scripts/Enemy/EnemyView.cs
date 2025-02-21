@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyView : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private MeshRenderer[] childs;
     [SerializeField] private ParticleSystem particleExplosion;
     [SerializeField] private Transform fireTransform;
+    [SerializeField] private Slider healthSlider;
     
     [SerializeField] private float targetDistance;
     
@@ -25,6 +27,7 @@ public class EnemyView : MonoBehaviour
     {
         enemyController.Start();
         tankView = GameObject.FindObjectOfType<TankView>();
+        healthSlider.value = enemyController.getHealth();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -103,7 +106,11 @@ public class EnemyView : MonoBehaviour
     {
         return rb;
     }
-    
+
+    public Slider getHealthSlider()
+    {
+        return healthSlider;
+    }
     public void setTankPoisition(Transform poi)
     {
        gameObject.transform.position = poi.position;
