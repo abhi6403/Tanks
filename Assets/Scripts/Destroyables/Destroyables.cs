@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Destroyables : MonoBehaviour
+public class Destroyables : MonoBehaviour, IDestroyables
 {
     public DestroyablesTypes Type;
     public float health;
@@ -21,26 +21,32 @@ public class Destroyables : MonoBehaviour
         }
     }
     
-    private float inidamage()
+    public float getDamagePower()
     {
         TankView tankView = FindObjectOfType<TankView>();
         damagePower =  tankView.getDamagePower();
         return damagePower;
     }
-    private void processDamage()
+    public void processDamage()
     {
-        inidamage();
-        if (health <= 0)
+        
+        if (health >= 0)
+        {
+            getDamagePower();
+            health -= damagePower;
+            uIController.UpdateScoreText(damagePower);
+        }
+        else
         {
             Destroy(gameObject);
-            SpawnDamageParticles();
+            spawnDamageParticles();
         }
         
-        health -= damagePower;
-        uIController.UpdateScoreText(damagePower);
+        
+        
     }
     
-    private void SpawnDamageParticles()
+    public void spawnDamageParticles()
     {
         Instantiate(explosionparticle, transform.position, Quaternion.identity);
     }

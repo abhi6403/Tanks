@@ -38,11 +38,14 @@ public class EnemyController
    
    public void Update()
    {
-      reloadTimer += Time.deltaTime;
-
-      if (reloadTimer > reloadTime)
+      if (enemyView.isPlayerFound)
       {
-         Fire();
+         reloadTimer += Time.deltaTime;
+
+         if (reloadTimer > reloadTime)
+         {
+            Fire();
+         }
       }
    }
 
