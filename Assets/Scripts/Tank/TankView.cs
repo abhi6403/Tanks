@@ -71,7 +71,22 @@ public class TankView : MonoBehaviour
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f)); 
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,ShellParentType.PLAYERTANK);
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (tankController.getHealth() >= 0)
+        {
+            if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.ENEMYTANK)
+            {
+                tankController.TakeDamage(5);
+            }
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public Transform getTankTransform()
     {
         return gameObject.transform;

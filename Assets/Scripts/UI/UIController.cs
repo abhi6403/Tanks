@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (gameStarted && timeRemaining > 0)
+        if (gameStarted==true && timeRemaining > 0)
         {
             UpdateTimeRemainingText();
         }
@@ -74,10 +74,10 @@ public class UIController : MonoBehaviour
 
     public void OpenGame()
     {
+        gameStarted = true;
         lobbyPannel.SetActive(false);
         gameMenuUI.SetActive(true);
         enemySpawner.createEnemy();
-        gameStarted = true;
     }
 
     public void GameOverMenu()

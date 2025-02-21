@@ -59,6 +59,10 @@ public class TankController
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        tankModel.setHealth(damage);
+    }
     public void setCurrentLaunchForce(float newLaunchForce)
     {
         tankModel.setCurrentLaunchForce(newLaunchForce);
@@ -137,4 +141,6 @@ public class TankController
     {
         return tankView;
     }
+
+    
 }

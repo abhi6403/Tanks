@@ -39,8 +39,14 @@ public class TankModel
     public void setTankController(TankController _tankController)
     {
         tankController = _tankController;
+        
     }
-    
+
+    public void setHealth(float _health)
+    {
+        health -= _health;
+        Debug.Log(health);
+    }
     public void setCurrentLaunchForce(float _currentLaunchForce)
     {
         currentLaunchForce = _currentLaunchForce;
