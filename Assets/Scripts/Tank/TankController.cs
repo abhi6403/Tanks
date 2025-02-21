@@ -72,6 +72,10 @@ public class TankController
         return tankModel.getMinLaunchForce();
     }
 
+    public float getHealth()
+    {
+        return tankModel.getHealth();
+    }
     public Transform getTankTransform()
     {
         return tankView.getTankTransform();

@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
         public float movementSpeed;
         public float rotationSpeed;
         public float damagePower;
+        public float health;
         public Material color;
         public Transform spawnPoint;
         public EnemyType type;
@@ -25,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i <= enemyList.Count; i++)
         {
             EnemyModel enemyModel =
-                new EnemyModel(enemyList[i].movementSpeed, enemyList[i].rotationSpeed, enemyList[i].damagePower, enemyList[i].color,enemyList[i].spawnPoint,enemyList[i].type);
+                new EnemyModel(enemyList[i].movementSpeed, enemyList[i].rotationSpeed, enemyList[i].damagePower, enemyList[i].color,enemyList[i].spawnPoint,enemyList[i].type,enemyList[i].health);
             EnemyController enemyController = new EnemyController(enemyModel, enemyView);
         }
     }

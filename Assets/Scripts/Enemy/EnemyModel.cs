@@ -9,13 +9,15 @@ public class EnemyModel
     private float movementSpeed;
     private float rotationSpeed;
     private float damagePower;
+    private float health;
+    
     private Material material;
     private Transform spawnPoint;
     private EnemyType enemyType;
 
     private float launchForce = 15;
 
-    public EnemyModel(float _movementSpeed, float _rotationSpeed, float _damagePower, Material _material, Transform _spawnPoint,EnemyType _enemyType)
+    public EnemyModel(float _movementSpeed, float _rotationSpeed, float _damagePower, Material _material, Transform _spawnPoint,EnemyType _enemyType,float _health)
     {
         movementSpeed = _movementSpeed;
         rotationSpeed = _rotationSpeed;
@@ -23,6 +25,7 @@ public class EnemyModel
         material = _material;
         spawnPoint = _spawnPoint;
         enemyType = _enemyType;
+        health = _health;
     }
 
     public void setEnemyController(EnemyController _enemyController)
@@ -35,11 +38,19 @@ public class EnemyModel
         return enemyType;
     }
 
+    public void setHealth(float _health)
+    {
+        health -= _health;
+    }
     public float getLaunchForce()
     {
         return launchForce;
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
     public Transform getSpawnPoint()
     {
         return spawnPoint;

@@ -1213,24 +1213,28 @@ MonoBehaviour:
   - movementSpeed: 10
     rotationSpeed: 10
     damagePower: 10
+    health: 100
     color: {fileID: 2100000, guid: 6221f2fbc7212d94cb9c069ee262d824, type: 2}
     spawnPoint: {fileID: 76587098}
     type: 0
   - movementSpeed: 10
     rotationSpeed: 10
     damagePower: 10
+    health: 100
     color: {fileID: 2100000, guid: 6221f2fbc7212d94cb9c069ee262d824, type: 2}
     spawnPoint: {fileID: 393858572}
     type: 0
   - movementSpeed: 10
     rotationSpeed: 10
     damagePower: 10
+    health: 100
     color: {fileID: 2100000, guid: 6221f2fbc7212d94cb9c069ee262d824, type: 2}
     spawnPoint: {fileID: 1987514533}
     type: 0
   - movementSpeed: 10
     rotationSpeed: 10
     damagePower: 10
+    health: 0
     color: {fileID: 2100000, guid: 6221f2fbc7212d94cb9c069ee262d824, type: 2}
     spawnPoint: {fileID: 1279134376}
     type: 0
@@ -3388,18 +3392,21 @@ MonoBehaviour:
   - movementSpeed: 30
     rotationSpeed: 75
     damagePower: 50
+    health: 100
     shellType: 2
     tankType: 0
     color: {fileID: 2100000, guid: c39933e60e73205419d1f79a2af1fdac, type: 2}
   - movementSpeed: 10
     rotationSpeed: 50
     damagePower: 55
+    health: 100
     shellType: 0
     tankType: 1
     color: {fileID: 2100000, guid: 463052f3f7389124f9e7b34b0b931d0d, type: 2}
   - movementSpeed: 60
     rotationSpeed: 120
     damagePower: 60
+    health: 100
     shellType: 1
     tankType: 2
     color: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}

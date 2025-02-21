@@ -13,7 +13,6 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private Transform fireTransform;
     
     [SerializeField] private float targetDistance;
-    [SerializeField] private BoxCollider collider;
     
     private Rigidbody rb;
     private Vector3 targetDirection;
@@ -62,16 +61,20 @@ public class EnemyView : MonoBehaviour
         }
     }
     
-    /*private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetComponent<ShellView>() != null &&
-            other.gameObject.layer != LayerMask.NameToLayer("EnemyShell"))
+        if (enemyController.getHealth() >= 0)
         {
-
-            enemyController.TakeDamage(10);
-
+            if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
+            {
+                enemyController.TakeDamage(10);
+            }
         }
-    }*/
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public void setEnemyController(EnemyController _enemyController)
     {
         enemyController = _enemyController;

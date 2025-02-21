@@ -8,6 +8,7 @@ public class TankModel
     private float movementSpeed;
     private float rotationSpeed;
     private float damagePower;
+    private float health;
     
     private TankTypes tankType;
     private Material tankMaterial;
@@ -21,7 +22,7 @@ public class TankModel
     private bool fired;
     private ShellType shellType;
 
-    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType,float _damagePower)
+    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType,float _damagePower,float _health)
     {
         movementSpeed = _movement;
         rotationSpeed = _rotation;
@@ -29,6 +30,7 @@ public class TankModel
         tankMaterial = _tankMaterial;
         shellType = _shellType;
         damagePower = _damagePower;
+        health = _health;
         
         currentLaunchForce = minLaunchForce; 
 
@@ -44,6 +46,10 @@ public class TankModel
         currentLaunchForce = _currentLaunchForce;
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
     public float getDamagePower()
     {
         return damagePower;

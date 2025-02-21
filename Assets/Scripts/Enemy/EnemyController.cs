@@ -86,9 +86,19 @@ public class EnemyController
          enemyView.transform.rotation = rotation;
       }
    }
+   
+   public void TakeDamage(int damage)
+   {
+       enemyModel.setHealth(damage);
+   }
    public float getMoveSpeed()
    {
       return enemyModel.getMovementSpeed();
+   }
+
+   public float getHealth()
+   {
+      return enemyModel.getHealth();
    }
    public EnemyType getEnemyType()
    {
@@ -98,4 +108,6 @@ public class EnemyController
    {
       return enemyModel.getLaunchForce();
    }
+
+   
 }
