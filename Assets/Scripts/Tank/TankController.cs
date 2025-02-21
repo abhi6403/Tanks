@@ -62,6 +62,7 @@ public class TankController
     public void TakeDamage(int damage)
     {
         tankModel.setHealth(damage);
+        tankView.getHealthSlider().value = tankModel.getHealth();
     }
     public void setCurrentLaunchForce(float newLaunchForce)
     {

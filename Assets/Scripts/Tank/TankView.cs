@@ -14,6 +14,7 @@ public class TankView : MonoBehaviour
 
     [SerializeField] private Transform fireTransform;
     [SerializeField] private Slider aimSlider;
+    [SerializeField] private Slider healthSlider;
 
     [SerializeField] private Rigidbody shell;
     [SerializeField] private ShellSpawner shellSpawner;
@@ -27,8 +28,9 @@ public class TankView : MonoBehaviour
         GameObject cam = GameObject.Find("Main Camera");
         cameraShake = cam.GetComponent<CameraShake>();
         cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(0f, 4f, -8f);
+        cam.transform.position = new Vector3(0f, 4f, -10f);
         aimSlider.value = tankController.getMinLaunchForce();
+        healthSlider.value = tankController.getHealth();
         shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
     }
 
@@ -103,6 +105,11 @@ public class TankView : MonoBehaviour
     public Slider getAimSlider()
     {
         return aimSlider;
+    }
+
+    public Slider getHealthSlider()
+    {
+        return healthSlider;
     }
     public Rigidbody getRigidbody()
     {
