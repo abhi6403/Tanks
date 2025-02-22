@@ -28,16 +28,21 @@ public class TankView : MonoBehaviour
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 4f, -10f);
         aimSlider.value = tankController.GetMinLaunchForce();
-        healthSlider.value = tankController.GetHealth();
+        healthSlider.maxValue = tankController.GetHealth();
+        healthSlider.value = healthSlider.maxValue;
         shellSpawner = FindObjectOfType<ShellSpawner>();
         uiController = FindObjectOfType<UIController>();
     }
 
     private void Update()
     {
-        Movement();
-        MoveTank();
-        tankController.FireProcess();
+        if (uiController.GetGameStarted())
+        {
+            Movement();
+            MoveTank();
+            tankController.FireProcess();
+        }
+        
     }
     
     public void SetTankController(TankController _tankController)
@@ -107,7 +112,6 @@ public class TankView : MonoBehaviour
     {
         return aimSlider;
     }
-
     public Slider GetHealthSlider()
     {
         return healthSlider;

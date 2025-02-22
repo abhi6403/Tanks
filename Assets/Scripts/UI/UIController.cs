@@ -33,12 +33,12 @@ public class UIController : MonoBehaviour
     {
         gameStarted = false;
         score = 0f;
-        timeRemaining = 60f;
+        timeRemaining = 150f;
     }
 
     private void Update()
     {
-        if (!gameStarted && timeRemaining > 0)
+        if (gameStarted && timeRemaining > 0)
         {
             UpdateTimeRemainingText();
         }
@@ -112,6 +112,11 @@ public class UIController : MonoBehaviour
         timeRemaining -= Time.deltaTime;
         timeLeft = (int)timeRemaining;
         TimeRemainingText.text = "Time Left: " + timeLeft;
+    }
+
+    public bool GetGameStarted()
+    {
+        return gameStarted;
     }
     
 }

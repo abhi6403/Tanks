@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class EnemyView : MonoBehaviour
 {
     private EnemyController enemyController;
+    private UIController uiController;
     private TankView tankView;
     public Vector3 DirectionToPlayer { get; private set; }
     public bool isPlayerFound { get; private set; }
@@ -22,15 +23,21 @@ public class EnemyView : MonoBehaviour
     {
         enemyController.Start();
         tankView = FindObjectOfType<TankView>();
-        healthSlider.value = enemyController.GetHealth();
+        uiController = FindObjectOfType<UIController>();
+        healthSlider.maxValue = enemyController.GetHealth();
+        healthSlider.value = healthSlider.maxValue;
         rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        CheckForPlayer();
-        enemyController.Update();
+        if (uiController.GetGameStarted())
+        {
+            CheckForPlayer();
+            enemyController.Update();
+        }
     }
+        
     private void CheckForPlayer()
     {
         Vector3 enemyToPlayerVector = tankView.transform.position - transform.position;
@@ -64,7 +71,7 @@ public class EnemyView : MonoBehaviour
         {
             if (other.gameObject.GetComponent<ShellView>().GetShellParentType() == ShellParentType.PLAYERTANK)
             {
-                enemyController.TakeDamage(10);
+                enemyController.TakeDamage((int)tankView.GetDamagePower());
             }
         }
         else
