@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private TankSpwaner tankSpwaner;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private GameObject lobbyPannel;
@@ -23,26 +24,25 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TimeRemainingText;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private TextMeshProUGUI scoreText;
-
-    private bool gameStarted;
+    
     private float score;
     private float timeRemaining;
     private int timeLeft;
-
+    
     private void Start()
     {
-        gameStarted = false;
+        gameManager.setGameState(GameState.STARTMENU);
         score = 0f;
         timeRemaining = 150f;
     }
 
     private void Update()
     {
-        if (gameStarted && timeRemaining > 0)
+        if (gameManager.getGameState()==GameState.GAMEPLAY)
         {
             UpdateTimeRemainingText();
         }
-        else if(timeRemaining <= 0)
+        else if(gameManager.getGameState() == GameState.GAMEOVER)
         {
             GameOverMenu();
         }
@@ -83,7 +83,7 @@ public class UIController : MonoBehaviour
 
     private void OpenGame()
     {
-        gameStarted = true;
+        gameManager.setGameState(GameState.GAMEPLAY);
         lobbyPannel.SetActive(false);
         gameMenuUI.SetActive(true);
         enemySpawner.CreateEnemy();
@@ -91,7 +91,7 @@ public class UIController : MonoBehaviour
 
     public void GameOverMenu()
     {
-        gameStarted = false;
+        gameManager.setGameState(GameState.GAMEOVER);
         gameOverPanel.SetActive(true);
         ShowResultText();
     }
@@ -112,11 +112,11 @@ public class UIController : MonoBehaviour
         timeRemaining -= Time.deltaTime;
         timeLeft = (int)timeRemaining;
         TimeRemainingText.text = "Time Left: " + timeLeft;
+        if (timeLeft <= 0)
+        {
+            gameManager.setGameState(GameState.GAMEOVER);
+        }
     }
-
-    public bool GetGameStarted()
-    {
-        return gameStarted;
-    }
+    
     
 }

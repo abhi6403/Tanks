@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     
     public void CreateEnemy()
     {
-        for (int i = 0; i <= enemyList.Count; i++)
+        for (int i = 0; i < enemyList.Count; i++)
         {
             EnemyModel enemyModel =
                 new EnemyModel(enemyList[i].movementSpeed, enemyList[i].rotationSpeed, enemyList[i].damagePower, enemyList[i].color,enemyList[i].spawnPoint,enemyList[i].type,enemyList[i].health);

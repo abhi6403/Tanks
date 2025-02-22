@@ -13,11 +13,14 @@ public class Destroyables : MonoBehaviour
     [SerializeField] private UIController uIController;
     [SerializeField] private Slider healthSlider;
     private float damagePower;
+    private ObjectsToBeDestroyed objectsToBeDestroyed;
 
     private void Start()
     {
         healthSlider.maxValue = health;
         healthSlider.value = health;
+        objectsToBeDestroyed = FindObjectOfType<ObjectsToBeDestroyed>();
+        objectsToBeDestroyed.AssignDestroyableObjects(this);
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -45,6 +48,7 @@ public class Destroyables : MonoBehaviour
         }
         else
         {
+            objectsToBeDestroyed.RemoveDestroyableObjects(this);
             Destroy(gameObject);
             spawnDamageParticles();
         }

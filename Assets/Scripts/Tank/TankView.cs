@@ -5,6 +5,7 @@ public class TankView : MonoBehaviour
 {
     private TankController tankController;
     private UIController uiController;
+    private GameManager gameManager;
     private CameraShake cameraShake;
     private float movement;
     private float rotation;
@@ -32,11 +33,12 @@ public class TankView : MonoBehaviour
         healthSlider.value = healthSlider.maxValue;
         shellSpawner = FindObjectOfType<ShellSpawner>();
         uiController = FindObjectOfType<UIController>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
     {
-        if (uiController.GetGameStarted())
+        if (gameManager.getGameState()==GameState.GAMEPLAY)
         {
             Movement();
             MoveTank();

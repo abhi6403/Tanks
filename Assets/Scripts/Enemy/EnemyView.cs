@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class EnemyView : MonoBehaviour
 {
     private EnemyController enemyController;
+    private GameManager gameManager;
     private UIController uiController;
     private TankView tankView;
     public Vector3 DirectionToPlayer { get; private set; }
@@ -24,6 +25,7 @@ public class EnemyView : MonoBehaviour
         enemyController.Start();
         tankView = FindObjectOfType<TankView>();
         uiController = FindObjectOfType<UIController>();
+        gameManager = FindObjectOfType<GameManager>();
         healthSlider.maxValue = enemyController.GetHealth();
         healthSlider.value = healthSlider.maxValue;
         rb = GetComponent<Rigidbody>();
@@ -31,7 +33,7 @@ public class EnemyView : MonoBehaviour
 
     private void Update()
     {
-        if (uiController.GetGameStarted())
+        if (gameManager.getGameState() == GameState.GAMEPLAY)
         {
             CheckForPlayer();
             enemyController.Update();
