@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour
     {
         gameManager.setGameState(GameState.STARTMENU);
         score = 0f;
-        timeRemaining = 150f;
+        timeRemaining = 75f;
     }
 
     private void Update()
