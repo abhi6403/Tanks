@@ -81,6 +81,7 @@ public class TankView : MonoBehaviour
     public void Fire()
     {
         tankController.SetFiredState(true);
+        SoundManager.Instance.Play(Sounds.SHOOTING);
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f)); 
         shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.GetCurrentLaunchForce(),fireTransform.forward,ShellParentType.PLAYERTANK);
     }
@@ -96,6 +97,7 @@ public class TankView : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.Play(Sounds.BLAST);
             Destroy(gameObject);
             uiController.GameOverMenu();
         }

@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         gameManager.setGameState(GameState.STARTMENU);
+        SoundManager.Instance.PlayMusic(Sounds.MUSIC);
         score = 0f;
         timeRemaining = 75f;
     }

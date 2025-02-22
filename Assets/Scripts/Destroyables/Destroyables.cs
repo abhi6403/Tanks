@@ -48,6 +48,7 @@ public class Destroyables : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.Play(Sounds.BLAST);
             objectsToBeDestroyed.RemoveDestroyableObjects(this);
             Destroy(gameObject);
             spawnDamageParticles();
