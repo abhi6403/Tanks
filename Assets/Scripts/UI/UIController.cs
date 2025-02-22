@@ -9,29 +9,36 @@ using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
-    public TankSpwaner tankSpwaner;
-    public EnemySpawner enemySpawner;
-    public GameObject lobbyPannel;
-    public GameObject mainMenuPanel;
-    public GameObject gameMenuUI;
-    public GameObject gameOverPanel;
+    [SerializeField] private TankSpwaner tankSpwaner;
+    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private GameObject lobbyPannel;
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject gameMenuUI;
+    [SerializeField] private GameObject gameOverPanel;
     
-    public Button startButton;
-    public Button quitButton;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button quitButton;
     
-    public TextMeshProUGUI ScoreText;
-    public TextMeshProUGUI TimeRemainingText;
-    public TextMeshProUGUI resultText;
-    public TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI ScoreText;
+    [SerializeField] private TextMeshProUGUI TimeRemainingText;
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
-    private bool gameStarted = false;
-    private float score = 0f;
-    private float timeRemaining = 60f;
+    private bool gameStarted;
+    private float score;
+    private float timeRemaining;
     private int timeLeft;
+
+    private void Start()
+    {
+        gameStarted = false;
+        score = 0f;
+        timeRemaining = 60f;
+    }
 
     private void Update()
     {
-        if (gameStarted==true && timeRemaining > 0)
+        if (!gameStarted && timeRemaining > 0)
         {
             UpdateTimeRemainingText();
         }
@@ -41,40 +48,40 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void StartButtonClicked()
+    private void StartButtonClicked()
     {
         lobbyPannel.SetActive(true);
         mainMenuPanel.SetActive(false);
     }
 
-    public void PlayagainButtonClicked()
+    private void PlayagainButtonClicked()
     {
         SceneManager.LoadScene(0);
     }
 
-    public void QuitButtonClicked()
+    private void QuitButtonClicked()
     {
         Application.Quit();
     }
-    public void BlueTankSlelected()
+    private void BlueTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.BLUETANK);
         OpenGame();
     }
     
-    public void GreenTankSlelected()
+    private void GreenTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.GREENTANK);
         OpenGame();
     }
     
-    public void RedTankSlelected()
+    private void RedTankSlelected()
     {
         tankSpwaner.CreateTank(TankTypes.REDTANK);
         OpenGame();
     }
 
-    public void OpenGame()
+    private void OpenGame()
     {
         gameStarted = true;
         lobbyPannel.SetActive(false);
@@ -95,12 +102,12 @@ public class UIController : MonoBehaviour
         ScoreText.text = "Score: " + score;
     }
 
-    public void ShowResultText()
+    private void ShowResultText()
     {
         scoreText.text =  ""+score;
         resultText.text = "Mastered!!!";
     }
-    public void UpdateTimeRemainingText()
+    private void UpdateTimeRemainingText()
     {
         timeRemaining -= Time.deltaTime;
         timeLeft = (int)timeRemaining;

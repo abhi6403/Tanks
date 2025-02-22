@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
 
 public class TankController 
@@ -12,18 +11,18 @@ public class TankController
     public TankController(TankModel _tankModel, TankView _tankView)
     {
         tankModel = _tankModel;
-        tankView = GameObject.Instantiate<TankView>(_tankView);
-        tankRigidbody = tankView.getRigidbody();
+        tankView = GameObject.Instantiate(_tankView);
+        tankRigidbody = tankView.GetRigidbody();
         
         tankModel.setTankController(this);
-        tankView.setTankController(this);
+        tankView.SetTankController(this);
 
-        tankView.ChangeColor(tankModel.getTankMaterial());
+        tankView.ChangeColor(tankModel.GetTankMaterial());
     }
 
     public void Move(float movement,float movementSpeed)
     {
-        tankRigidbody.velocity = tankView.transform.forward * movementSpeed * movement;
+        tankRigidbody.velocity = tankView.GetTankTransform() * movementSpeed * movement;
     }
 
     public void Rotate(float rotate, float rotationSpeed)
@@ -35,113 +34,91 @@ public class TankController
 
     public void FireProcess()
     {
-        getAimSlider().value = tankModel.getMinLaunchForce();
+        getAimSlider().value = tankModel.GetMinLaunchForce();
 
-        if (getCurrentLaunchForce() >= getMaxLaunchForce() && !getFiredState())
+        if (GetCurrentLaunchForce() >= getMaxLaunchForce() && !getFiredState())
         {
             setCurrentLaunchForce(getMaxLaunchForce());
             tankView.Fire();
         }
         else if (Input.GetButtonDown("Jump"))
         {
-            setFiredState(false);
-            setCurrentLaunchForce(getMinLaunchForce());
+            SetFiredState(false);
+            setCurrentLaunchForce(GetMinLaunchForce());
         }
         else if (Input.GetButton("Jump") && !getFiredState())
         {
-            float temp = getCurrentLaunchForce() + getMaxChargeSpeed() * Time.deltaTime;
+            float temp = GetCurrentLaunchForce() + getMaxChargeSpeed() * Time.deltaTime;
             setCurrentLaunchForce(temp);
-            getAimSlider().value = getCurrentLaunchForce();
+            getAimSlider().value = GetCurrentLaunchForce();
         }
         else if (Input.GetButtonUp("Jump"))
         {
             tankView.Fire();
         }
     }
+    
+    private void setCurrentLaunchForce(float newLaunchForce)
+    {
+        tankModel.setCurrentLaunchForce(newLaunchForce);
+    }
 
     public void TakeDamage(int damage)
     {
         tankModel.setHealth(damage);
-        tankView.getHealthSlider().value = tankModel.getHealth();
+        tankView.GetHealthSlider().value = tankModel.GetHealth();
     }
-    public void setCurrentLaunchForce(float newLaunchForce)
-    {
-        tankModel.setCurrentLaunchForce(newLaunchForce);
-    }
-    public TankTypes getTankType()
-    {
-        return tankModel.getTankType();
-    }
-    public float getMinLaunchForce()
-    {
-        return tankModel.getMinLaunchForce();
-    }
-
-    public float getHealth()
-    {
-        return tankModel.getHealth();
-    }
-    public Transform getTankTransform()
-    {
-        return tankView.getTankTransform();
-    }
-    public float getMaxLaunchForce()
-    {
-        return tankModel.getMaxLaunchForce();
-    }
-
-    public float getCurrentLaunchForce()
-    {
-        return tankModel.getCurrentLaunchForce();
-    }
-
-    public float getMaxChargeSpeed()
-    {
-        return tankModel.getChargeSpeed();
-    }
-
-    public float getMaxChargeTime()
-    {
-        return tankModel.getMaxChargeTime();
-    }
-
-    public bool getFiredState()
-    {
-       return tankModel.getFiredState();
-    }
-
-    public void setFiredState(bool state)
-    {
-        tankModel.setFiredState(state);
-    }
-
-    public float getMovementSpeed()
-    {
-        return tankModel.getMovementSpeed();
-    }
-
-    public float getDamagePower()
-    {
-        return tankModel.getDamagePower();
-    }
-    public float getRotationSpeed()
-    {
-        return tankModel.getRotationSpeed();
-    }
-
-    public Slider getAimSlider()
-    {
-        return tankView.getAimSlider();
-    }
-    public TankModel GetTankModel()
-    {
-        return tankModel;
-    }
-
-    public TankView GetTankView()
-    {
-        return tankView;
-    }
-
     
+    private float getMaxLaunchForce()
+    {
+        return tankModel.GetMaxLaunchForce();
+    }
+    
+    private float getMaxChargeSpeed()
+    {
+        return tankModel.GetChargeSpeed();
+    }
+    
+    private bool getFiredState()
+    {
+        return tankModel.GetFiredState();
+    }
+    
+    private Slider getAimSlider()
+    {
+        return tankView.GetAimSlider();
+    }
+    
+    public float GetMinLaunchForce()
+    {
+        return tankModel.GetMinLaunchForce();
+    }
+
+    public float GetHealth()
+    {
+        return tankModel.GetHealth();
+    }
+
+    public float GetCurrentLaunchForce()
+    {
+        return tankModel.GetCurrentLaunchForce();
+    }
+    public void SetFiredState(bool state)
+    {
+        tankModel.SetFiredState(state);
+    }
+
+    public float GetMovementSpeed()
+    {
+        return tankModel.GetMovementSpeed();
+    }
+
+    public float GetDamagePower()
+    {
+        return tankModel.GetDamagePower();
+    }
+    public float GetRotationSpeed()
+    {
+        return tankModel.GetRotationSpeed();
+    }
 }

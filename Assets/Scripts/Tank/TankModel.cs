@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Accessibility;
 
 public class TankModel 
 {
@@ -20,15 +19,13 @@ public class TankModel
     private float currentLaunchForce;
     private float chargeSpeed;
     private bool fired;
-    private ShellType shellType;
 
-    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,ShellType _shellType,float _damagePower,float _health)
+    public TankModel(float _movement, float _rotation,TankTypes _tankType, Material _tankMaterial,float _damagePower,float _health)
     {
         movementSpeed = _movement;
         rotationSpeed = _rotation;
         tankType = _tankType;
         tankMaterial = _tankMaterial;
-        shellType = _shellType;
         damagePower = _damagePower;
         health = _health;
         
@@ -45,70 +42,57 @@ public class TankModel
     public void setHealth(float _health)
     {
         health -= _health;
-        Debug.Log(health);
     }
     public void setCurrentLaunchForce(float _currentLaunchForce)
     {
         currentLaunchForce = _currentLaunchForce;
     }
 
-    public float getHealth()
+    public float GetHealth()
     {
         return health;
     }
-    public float getDamagePower()
+    public float GetDamagePower()
     {
         return damagePower;
     }
-    public TankTypes getTankType()
-    {
-        return tankType;
-    }
-
-    public float getMovementSpeed()
+    public float GetMovementSpeed()
     {
         return movementSpeed;
     }
 
-    public float getRotationSpeed()
+    public float GetRotationSpeed()
     {
         return rotationSpeed;
     }
 
-    public float getChargeSpeed()
+    public float GetChargeSpeed()
     {
         return chargeSpeed;
     }
-    public Material getTankMaterial()
+    public Material GetTankMaterial()
     {
         return tankMaterial;
     }
 
-    public float getMaxLaunchForce()
+    public float GetMaxLaunchForce()
     {
         return maxLaunchForce;
     }
 
-    public float getMinLaunchForce()
+    public float GetMinLaunchForce()
     {
         return minLaunchForce;
     }
-
-    public float getMaxChargeTime()
-    {
-        return maxChargeTime;
-    }
-
-    public float getCurrentLaunchForce()
+    public float GetCurrentLaunchForce()
     {
         return currentLaunchForce;
     }
-    public bool getFiredState()
+    public bool GetFiredState()
     {
         return fired;
     }
-
-    public void setFiredState(bool _fired)
+    public void SetFiredState(bool _fired)
     {
         fired = _fired;
     }

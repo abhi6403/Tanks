@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TankView : MonoBehaviour
 {
     private TankController tankController;
+    private UIController uiController;
     private CameraShake cameraShake;
     private float movement;
     private float rotation;
@@ -18,11 +18,8 @@ public class TankView : MonoBehaviour
 
     [SerializeField] private Rigidbody shell;
     [SerializeField] private ShellSpawner shellSpawner;
-    private UIController uiController;
-    public void setTankController(TankController _tankController)
-    {
-        tankController = _tankController;
-    }
+    
+    
 
     private void Start()
     {
@@ -30,10 +27,10 @@ public class TankView : MonoBehaviour
         cameraShake = cam.GetComponent<CameraShake>();
         cam.transform.SetParent(transform);
         cam.transform.position = new Vector3(0f, 4f, -10f);
-        aimSlider.value = tankController.getMinLaunchForce();
-        healthSlider.value = tankController.getHealth();
-        shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
-        uiController = GameObject.FindObjectOfType<UIController>();
+        aimSlider.value = tankController.GetMinLaunchForce();
+        healthSlider.value = tankController.GetHealth();
+        shellSpawner = FindObjectOfType<ShellSpawner>();
+        uiController = FindObjectOfType<UIController>();
     }
 
     private void Update()
@@ -42,17 +39,22 @@ public class TankView : MonoBehaviour
         MoveTank();
         tankController.FireProcess();
     }
-
+    
+    public void SetTankController(TankController _tankController)
+    {
+        tankController = _tankController;
+    }
+    
     private void MoveTank()
     {
         if (movement != 0)
         {
-            tankController.Move(movement,tankController.getMovementSpeed());
+            tankController.Move(movement,tankController.GetMovementSpeed());
         }
 
         if (rotation != 0)
         {
-            tankController.Rotate(rotation,tankController.getRotationSpeed());
+            tankController.Rotate(rotation,tankController.GetRotationSpeed());
         }
     }
     private void Movement()
@@ -71,14 +73,14 @@ public class TankView : MonoBehaviour
     
     public void Fire()
     {
-        tankController.setFiredState(true);
+        tankController.SetFiredState(true);
         StartCoroutine(cameraShake.Shake(0.1f, 0.1f)); 
-        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.getCurrentLaunchForce(),fireTransform.forward,ShellParentType.PLAYERTANK);
+        shellSpawner.SpawnShell(fireTransform.position,fireTransform.rotation,tankController.GetCurrentLaunchForce(),fireTransform.forward,ShellParentType.PLAYERTANK);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (tankController.getHealth() >= 0)
+        if (tankController.GetHealth() >= 0)
         {
             if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.ENEMYTANK)
             {
@@ -92,29 +94,25 @@ public class TankView : MonoBehaviour
         }
     }
 
-    public Transform getTankTransform()
+    public Vector3 GetTankTransform()
     {
-        return gameObject.transform;
+        return transform.forward;
     }
-
-    public float getDamagePower()
+    
+    public float GetDamagePower()
     {
-        return tankController.getDamagePower();
+        return tankController.GetDamagePower();
     }
-    public TankTypes getTankType()
-    {
-        return tankController.getTankType();
-    }
-    public Slider getAimSlider()
+    public Slider GetAimSlider()
     {
         return aimSlider;
     }
 
-    public Slider getHealthSlider()
+    public Slider GetHealthSlider()
     {
         return healthSlider;
     }
-    public Rigidbody getRigidbody()
+    public Rigidbody GetRigidbody()
     {
         return rb;
     }

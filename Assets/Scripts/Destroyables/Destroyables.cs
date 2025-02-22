@@ -5,23 +5,21 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Destroyables : MonoBehaviour, IDestroyables
+public class Destroyables : MonoBehaviour
 {
-    public DestroyablesTypes Type;
-    public float health;
-    public ParticleSystem explosionparticle;
-    public UIController uIController;
-    private float damagePower;
+    [SerializeField] private DestroyablesTypes Type;
+    [SerializeField] private float health;
+    [SerializeField] private ParticleSystem explosionparticle;
+    [SerializeField] private UIController uIController;
     [SerializeField] private Slider healthSlider;
+    private float damagePower;
 
-
-
-    void Start()
+    private void Start()
     {
         healthSlider.maxValue = health;
         healthSlider.value = health;
     }
-    public void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
         {
@@ -29,19 +27,18 @@ public class Destroyables : MonoBehaviour, IDestroyables
         }
     }
     
-    public float getDamagePower()
+    private float getDamagePower()
     {
         TankView tankView = FindObjectOfType<TankView>();
-        damagePower =  tankView.getDamagePower();
-        TakeDamage(damagePower);
+        damagePower =  tankView.GetDamagePower();
         return damagePower;
     }
-    public void processDamage()
+    private void processDamage()
     {
-        
         if (health >= 0)
         {
             getDamagePower();
+            healthSlider.value -= damagePower;
             health -= damagePower;
             
             uIController.UpdateScoreText(damagePower);
@@ -52,15 +49,9 @@ public class Destroyables : MonoBehaviour, IDestroyables
             spawnDamageParticles();
         }
         
-        
-        
     }
-
-    public void TakeDamage(float damage)
-    {
-        healthSlider.value -= damage;
-    }
-    public void spawnDamageParticles()
+    
+    private void spawnDamageParticles()
     {
         Instantiate(explosionparticle, transform.position, Quaternion.identity);
     }

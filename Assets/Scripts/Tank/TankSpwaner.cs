@@ -10,7 +10,6 @@ public class TankSpwaner : MonoBehaviour
         public float rotationSpeed;
         public float damagePower;
         public float health;
-        public ShellType shellType;
         public TankTypes tankType;
         public Material color;
     }
@@ -37,7 +36,7 @@ public class TankSpwaner : MonoBehaviour
 
         if (tank != null)
         {
-            TankModel tankModel = new TankModel(tank.movementSpeed,tank.rotationSpeed,tank.tankType,tank.color,tank.shellType,tank.damagePower,tank.health);
+            TankModel tankModel = new TankModel(tank.movementSpeed,tank.rotationSpeed,tank.tankType,tank.color,tank.damagePower,tank.health);
             TankController controller = new TankController(tankModel, tankView);
         }
     }
