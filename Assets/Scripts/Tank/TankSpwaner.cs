@@ -14,9 +14,9 @@ public class TankSpwaner : MonoBehaviour
         public Material color;
     }
     
-    public TankView tankView;
+    [SerializeField] private TankView tankView;
 
-    public List<Tank> tanksList;
+    [SerializeField] private List<Tank> tanksList;
  
     public void CreateTank(TankTypes tankType)
     {

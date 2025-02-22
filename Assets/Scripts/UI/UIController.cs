@@ -86,7 +86,7 @@ public class UIController : MonoBehaviour
         gameStarted = true;
         lobbyPannel.SetActive(false);
         gameMenuUI.SetActive(true);
-        enemySpawner.createEnemy();
+        enemySpawner.CreateEnemy();
     }
 
     public void GameOverMenu()

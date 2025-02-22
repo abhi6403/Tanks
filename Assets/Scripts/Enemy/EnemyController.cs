@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,23 +5,24 @@ public class EnemyController
 {
    private EnemyModel enemyModel;
    private EnemyView enemyView;
+   private ShellSpawner shellSpawner;
 
    private Vector3 targetDirection;
    private NavMeshAgent navMeshAgent;
    
    private float launchForce;
    private float reloadTime;
-   private float reloadTimer = 0;
-   private ShellSpawner shellSpawner;
+   private float reloadTimer;
+   
    public EnemyController(EnemyModel _enemyModel, EnemyView _enemyView)
    {
       enemyModel = _enemyModel;
-      enemyView = GameObject.Instantiate<EnemyView>(_enemyView);
+      enemyView = GameObject.Instantiate(_enemyView);
       
       enemyModel.setEnemyController(this);
       enemyView.setEnemyController(this);
       
-      enemyView.setTankPoisition(enemyModel.getSpawnPoint());
+      enemyView.SetTankPosition(enemyModel.getSpawnPoint());
       enemyView.ChangeColor(enemyModel.getMaterial());
       navMeshAgent = enemyView.GetComponent<NavMeshAgent>();
 
@@ -33,6 +32,7 @@ public class EnemyController
    {
       shellSpawner = GameObject.FindObjectOfType<ShellSpawner>();
       reloadTime = 2f;
+      reloadTimer = 0f;
       launchForce = 15f;
    }
    
@@ -51,7 +51,7 @@ public class EnemyController
 
    private void Fire()
    {
-         shellSpawner.SpawnShell(enemyView.getFireTransform().position,enemyView.getFireTransform().rotation,launchForce,enemyView.getFireTransform().forward,ShellParentType.ENEMYTANK);
+         shellSpawner.SpawnShell(enemyView.GetFireTransform().position,enemyView.GetFireTransform().rotation,launchForce,enemyView.GetFireTransform().forward,ShellParentType.ENEMYTANK);
 
          reloadTimer = 0;
    }
@@ -62,13 +62,13 @@ public class EnemyController
       if (!enemyView.isPlayerFound)
       {
          navMeshAgent.isStopped = false;
-         navMeshAgent.SetDestination(enemyView.getTankView().transform.position);
+         navMeshAgent.SetDestination(enemyView.GetTankView().transform.position);
       }
       else
       {
          navMeshAgent.isStopped = true;
 
-         targetDirection = enemyView.directionToPlayer;
+         targetDirection = enemyView.DirectionToPlayer;
          navMeshAgent.SetDestination(enemyView.transform.position);
 
       }
@@ -93,25 +93,11 @@ public class EnemyController
    public void TakeDamage(int damage)
    {
        enemyModel.setHealth(damage);
-       enemyView.getHealthSlider().value = enemyModel.getHealth();
+       enemyView.GetHealthSlider().value = enemyModel.getHealth();
    }
-   public float getMoveSpeed()
-   {
-      return enemyModel.getMovementSpeed();
-   }
-
-   public float getHealth()
+   public float GetHealth()
    {
       return enemyModel.getHealth();
    }
-   public EnemyType getEnemyType()
-   {
-      return enemyModel.getEnemyType();
-   }
-   public float getLaunchForce()
-   {
-      return enemyModel.getLaunchForce();
-   }
-
    
 }

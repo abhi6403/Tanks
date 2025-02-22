@@ -1,33 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyView : MonoBehaviour
 {
     private EnemyController enemyController;
-    public Vector3 directionToPlayer { get; private set; }
+    private TankView tankView;
+    public Vector3 DirectionToPlayer { get; private set; }
     public bool isPlayerFound { get; private set; }
 
     [SerializeField] private MeshRenderer[] childs;
     [SerializeField] private ParticleSystem particleExplosion;
     [SerializeField] private Transform fireTransform;
     [SerializeField] private Slider healthSlider;
-    
     [SerializeField] private float targetDistance;
     
     private Rigidbody rb;
     private Vector3 targetDirection;
     private float timer;
-    private float waitTime = 5f;
-    private TankView tankView;
+    private float waitTime;
 
     private void Start()
     {
+        waitTime = 5f;
         enemyController.Start();
-        tankView = GameObject.FindObjectOfType<TankView>();
-        healthSlider.value = enemyController.getHealth();
+        tankView = FindObjectOfType<TankView>();
+        healthSlider.value = enemyController.GetHealth();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -39,19 +36,17 @@ public class EnemyView : MonoBehaviour
     private void CheckForPlayer()
     {
         Vector3 enemyToPlayerVector = tankView.transform.position - transform.position;
-        directionToPlayer = enemyToPlayerVector.normalized;
+        DirectionToPlayer = enemyToPlayerVector.normalized;
         float distanceToPlayer = enemyToPlayerVector.magnitude;
 
         float buffer = .2f;
 
         if (distanceToPlayer <= targetDistance - buffer)
         {
-
             isPlayerFound = true;
         }
         else if (distanceToPlayer >= targetDistance + buffer)
         {
-
             isPlayerFound = false;
         }
     }
@@ -67,7 +62,7 @@ public class EnemyView : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (enemyController.getHealth() >= 0)
+        if (enemyController.GetHealth() > 0)
         {
             if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
             {
@@ -85,7 +80,7 @@ public class EnemyView : MonoBehaviour
         enemyController = _enemyController;
     }
     
-    public void spawnDamageParticles()
+    private void spawnDamageParticles()
     {
         Instantiate(particleExplosion, transform.position, Quaternion.identity);
     }
@@ -97,26 +92,20 @@ public class EnemyView : MonoBehaviour
         }
     }
 
-    public TankView getTankView()
+    public TankView GetTankView()
     {
         return tankView;
     }
-    
-    public Rigidbody GetRigidBody()
-    {
-        return rb;
-    }
-
-    public Slider getHealthSlider()
+    public Slider GetHealthSlider()
     {
         return healthSlider;
     }
-    public void setTankPoisition(Transform poi)
+    public void SetTankPosition(Transform poi)
     {
        gameObject.transform.position = poi.position;
     }
 
-    public Transform getFireTransform()
+    public Transform GetFireTransform()
     {
         return fireTransform;
     }

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,11 +15,11 @@ public class EnemySpawner : MonoBehaviour
         public EnemyType type;
     }
 
-    public EnemyView enemyView;
+    [SerializeField] private EnemyView enemyView;
     
     [SerializeField] private List<EnemyTank> enemyList;
     
-    public void createEnemy()
+    public void CreateEnemy()
     {
         for (int i = 0; i <= enemyList.Count; i++)
         {
