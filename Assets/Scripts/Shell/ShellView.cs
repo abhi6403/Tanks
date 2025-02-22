@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShellView : MonoBehaviour
@@ -13,17 +11,17 @@ public class ShellView : MonoBehaviour
    {
        shellController = _shellController;
    }
-   public Rigidbody getRigidbody()
+   public Rigidbody GetRigidbody()
    {
        return shellRigidBody;
    }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter()
     {
         SpawnDamageParticles();
         Explode();
     }
 
-    public ShellParentType getShellParentType()
+    public ShellParentType GetShellParentType()
     {
         return shellController.getShellParentType();
     }

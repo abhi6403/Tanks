@@ -82,7 +82,7 @@ public class TankView : MonoBehaviour
     {
         if (tankController.GetHealth() >= 0)
         {
-            if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.ENEMYTANK)
+            if (other.gameObject.GetComponent<ShellView>().GetShellParentType() == ShellParentType.ENEMYTANK)
             {
                 tankController.TakeDamage(5);
             }

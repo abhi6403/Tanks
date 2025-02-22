@@ -17,11 +17,9 @@ public class EnemyView : MonoBehaviour
     private Rigidbody rb;
     private Vector3 targetDirection;
     private float timer;
-    private float waitTime;
-
+    
     private void Start()
     {
-        waitTime = 5f;
         enemyController.Start();
         tankView = FindObjectOfType<TankView>();
         healthSlider.value = enemyController.GetHealth();
@@ -64,7 +62,7 @@ public class EnemyView : MonoBehaviour
     {
         if (enemyController.GetHealth() > 0)
         {
-            if (other.gameObject.GetComponent<ShellView>().getShellParentType() == ShellParentType.PLAYERTANK)
+            if (other.gameObject.GetComponent<ShellView>().GetShellParentType() == ShellParentType.PLAYERTANK)
             {
                 enemyController.TakeDamage(10);
             }

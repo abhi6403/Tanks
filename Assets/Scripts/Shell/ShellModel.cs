@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShellModel 
@@ -26,26 +24,26 @@ public class ShellModel
         shellController = _shellController;
     }
 
-    public ShellParentType getShellParentType()
+    public ShellParentType GetShellParentType()
     {
         return shellParentType;
     }
-    public Vector3 getPosition()
+    public Vector3 GetPosition()
     {
         return position;
     }
 
-    public Vector3 getDirection()
+    public Vector3 GetDirection()
     {
         return direction;
     }
 
-    public Quaternion getRotation()
+    public Quaternion GetRotation()
     {
         return rotation;
     }
 
-    public float getLaunchForce()
+    public float GetLaunchForce()
     {
         return launchForce;
     }

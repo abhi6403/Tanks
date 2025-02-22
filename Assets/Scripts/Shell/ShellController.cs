@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShellController 
@@ -13,7 +10,7 @@ public class ShellController
     public ShellController(ShellModel _shellModel, ShellView _shellView)
     {
         shellModel = _shellModel;
-        shellView = GameObject.Instantiate<ShellView>(_shellView, getPosition(), getRotation());
+        shellView = GameObject.Instantiate(_shellView, getPosition(), getRotation());
         
         shellModel.setShellController(this);
         shellView.setShellController(this);
@@ -24,32 +21,32 @@ public class ShellController
 
     private void SpawnShell()
     {
-        shellRigidBody = shellView.getRigidbody();
-        shellRigidBody.velocity = getLaunchForce() * getDirection();
+        shellRigidBody = shellView.GetRigidbody();
+        shellRigidBody.velocity = GetLaunchForce() * getDirection();
     }
 
     public ShellParentType getShellParentType()
     {
-        return shellModel.getShellParentType();
+        return shellModel.GetShellParentType();
     }
     public Vector3 getPosition()
     {
-        return shellModel.getPosition();
+        return shellModel.GetPosition();
     }
 
     public Vector3 getDirection()
     {
-        return shellModel.getDirection();
+        return shellModel.GetDirection();
     }
 
     public Quaternion getRotation()
     {
-        return shellModel.getRotation();
+        return shellModel.GetRotation();
     }
 
-    public float getLaunchForce()
+    public float GetLaunchForce()
     {
-        return shellModel.getLaunchForce();
+        return shellModel.GetLaunchForce();
     }
     
 }
